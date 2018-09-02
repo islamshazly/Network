@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'UI-AG_Example' do
+  pod 'UI-AG', :path => '../'
+
+  target 'UI-AG_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
