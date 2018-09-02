@@ -8,6 +8,7 @@
 import UIKit
 
 open class LongPressGesture: UILongPressGestureRecognizer {
+    
     private var longPressAction: ((UILongPressGestureRecognizer) -> Void)?
     
     public override init(target: Any?, action: Selector?) {

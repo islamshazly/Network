@@ -7,6 +7,7 @@
 import UIKit
 
 open class SwipeGesture: UISwipeGestureRecognizer {
+    
     private var swipeAction: ((UISwipeGestureRecognizer) -> Void)?
     
     public override init(target: Any?, action: Selector?) {
