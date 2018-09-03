@@ -10,7 +10,7 @@ import UIKit
 public extension UIScreen {
     
     public static var screenWidth: CGFloat {
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+        if UIInterfaceOrientationIsPortrait(UIApplication.statusBarOrientation) {
             return UIScreen.main.bounds.size.width
         } else {
             return UIScreen.main.bounds.size.height
@@ -18,7 +18,7 @@ public extension UIScreen {
     }
     
     public static var screenHeight: CGFloat {
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+        if UIInterfaceOrientationIsPortrait(UIApplication.statusBarOrientation) {
             return UIScreen.main.bounds.size.height
         } else {
             return UIScreen.main.bounds.size.width
@@ -26,7 +26,7 @@ public extension UIScreen {
     }
     
     public static var screenHeightWithoutStatusBar: CGFloat {
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+        if UIInterfaceOrientationIsPortrait(UIApplication.statusBarOrientation) {
             return UIScreen.main.bounds.size.height - screenStatusBarHeight
         } else {
             return UIScreen.main.bounds.size.width - screenStatusBarHeight

@@ -24,7 +24,7 @@ extension UIEdgeInsets {
         self.init(top: vertical/2, left: horizontal/2, bottom: vertical/2, right: horizontal/2)
     }
     
-    public func insetBy(InsetSide side: InsetSide, value : CGFloat) -> UIEdgeInsets {
+    public func insetBy(value : CGFloat,To side: InsetSide) -> UIEdgeInsets {
         switch side
         {
             
@@ -50,9 +50,44 @@ extension UIEdgeInsets {
                                 right: self.right + right)
         }
     }
+    
 }
 
-
-
+public extension UIEdgeInsets {
+    
+    public static func + (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets(top: lhs.top + rhs.top, left: lhs.left + rhs.left, bottom: lhs.bottom + rhs.bottom, right: lhs.right + rhs.right)
+    }
+    
+    public static func += (lhs: inout UIEdgeInsets, rhs: UIEdgeInsets) {
+        lhs.top += rhs.top
+        lhs.left += rhs.right
+        lhs.bottom += rhs.bottom
+        lhs.right += rhs.right
+    }
+    
+    public static func - (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets(top: lhs.top - rhs.top, left: lhs.left - rhs.left, bottom: lhs.bottom - rhs.bottom, right: lhs.right - rhs.right)
+    }
+    
+    public static func -= (lhs: inout UIEdgeInsets, rhs: UIEdgeInsets) {
+        lhs.top -= rhs.top
+        lhs.left -= rhs.right
+        lhs.bottom -= rhs.bottom
+        lhs.right -= rhs.right
+    }
+    
+    public static func * (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets(top: lhs.top * rhs.top, left: lhs.left * rhs.left, bottom: lhs.bottom * rhs.bottom, right: lhs.right * rhs.right)
+    }
+    
+    public static func *= (lhs: inout UIEdgeInsets, rhs: UIEdgeInsets) {
+        lhs.top *= rhs.top
+        lhs.left *= rhs.right
+        lhs.bottom *= rhs.bottom
+        lhs.right *= rhs.right
+    }
+    
+}
 
 

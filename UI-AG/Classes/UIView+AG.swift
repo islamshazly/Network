@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - Properties
+
 extension UIView {
     
     public enum BorderSide {
@@ -9,23 +11,23 @@ extension UIView {
         case right
     }
     
-    public var endX : CGFloat {
+    public var endX: CGFloat {
         return frame.origin.x + frame.width
     }
     
-    public var endY : CGFloat {
+    public var endY: CGFloat {
         return frame.origin.y + frame.height
     }
     
-    public var startX : CGFloat {
+    public var startX: CGFloat {
         return frame.origin.x
     }
     
-    public var startY : CGFloat {
+    public var startY: CGFloat {
         return frame.origin.y
     }
     
-    public var width : CGFloat {
+    public var width: CGFloat {
         get {
              return frame.width
         } set(value) {
@@ -33,44 +35,66 @@ extension UIView {
         }
     }
     
-    public var height : CGFloat {
+    public var height: CGFloat {
         get {
             return frame.height
         } set(value) {
             self.frame.size = CGSize(width: width, height: value)
         }
     }
+}
+
+// MARK: - Methods
+
+extension UIView {
     
-    public func setStartX(x : CGFloat) {
+    public func startX(x : CGFloat) {
         self.frame.origin.x = x
     }
     
-    public func setStartY( y : CGFloat) {
+    public func startY( y : CGFloat) {
         self.frame.origin.y = y
     }
     
-    public func setCenter(x : CGFloat, y : CGFloat) {
-        self.center = CGPoint(x : x,y: y)
+    public func center(x : CGFloat, y : CGFloat) {
+        self.center = CGPoint(x: x, y: y)
     }
     
-    public func getCenter() -> CGPoint {
-        return self.center
+    public func centerX(x: CGFloat) {
+        self.center = CGPoint(x: x, y: self.centerY())
     }
     
-    public func setCenterX(x: CGFloat) {
-        self.center = CGPoint(x: x, y: self.getCenterY())
-    }
-    
-    public func getCenterX() -> CGFloat {
+    public func centerX() -> CGFloat {
         return self.center.x
     }
     
-    public func setCenterY(y : CGFloat)  {
-        self.center = CGPoint(x : self.getCenterX(), y : y)
+    public func centerY(y : CGFloat)  {
+        self.center = CGPoint(x : self.centerX(), y : y)
     }
     
-    public func getCenterY() -> CGFloat {
+    public func centerY() -> CGFloat {
         return self.center.y
+    }
+    
+    public class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
+        return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
+    }
+    
+    public func removeSubviews() {
+        subviews.forEach({ $0.removeFromSuperview() })
+    }
+    
+}
+// MARK: - UI Methods
+
+extension UIView {
+    
+    public func dim() {
+        self.alpha = 0.5
+    }
+    
+    public func unDim() {
+        self.alpha = 1
     }
     
     public func applyBorder(_ color: UIColor) {
@@ -134,13 +158,6 @@ extension UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
-    public class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
-        return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
-    }
-    
-    public func removeSubviews() {
-        subviews.forEach({ $0.removeFromSuperview() })
-    }
 }
 
 // MARK: Transform Extensions
@@ -182,9 +199,10 @@ extension UIView {
         transform = CATransform3DScale(transform, x, y, 1)
         self.layer.transform = transform
     }
+    
 }
 
-//MARK: - Animations
+// MARK: - Animations
 
 private let UIViewAnimationDuration: TimeInterval = 1
 private let UIViewAnimationSpringDamping: CGFloat = 0.5
@@ -246,9 +264,10 @@ public extension UIView {
             self?.setScale(x: 1, y: 1)
             }, completion: { (_) in })
     }
+    
 }
 
-//MARK: - Gesture
+// MARK: - Gesture
 
 public extension UIView {
     
@@ -261,6 +280,12 @@ public extension UIView {
     public func addSwipeGesture(direction: UISwipeGestureRecognizerDirection, fingerCount: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
         let tap = SwipeGesture(direction: direction, fingerCount: fingerCount, action: action)
         addGestureRecognizer(tap)
+        isUserInteractionEnabled = true
+    }
+    
+    public func addLongPressGesture(_ action: ((UILongPressGestureRecognizer) -> Void)?) {
+        let longPressGesture = LongPressGesture(action: action)
+        addGestureRecognizer(longPressGesture)
         isUserInteractionEnabled = true
     }
     

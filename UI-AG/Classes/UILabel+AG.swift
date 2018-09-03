@@ -16,24 +16,24 @@ public extension UILabel {
         self.textAlignment = alignment
     }
     
-    public func getEstimatedSize(_ width: CGFloat = CGFloat.greatestFiniteMagnitude, height: CGFloat = CGFloat.greatestFiniteMagnitude) -> CGSize {
+    public func estimatedSize(_ width: CGFloat = CGFloat.greatestFiniteMagnitude, height: CGFloat = CGFloat.greatestFiniteMagnitude) -> CGSize {
         return sizeThatFits(CGSize(width: width, height: height))
     }
     
-    public func getEstimatedHeight() -> CGFloat {
+    public func estimatedHeight() -> CGFloat {
         return sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)).height
     }
     
-    public func getEstimatedWidth() -> CGFloat {
+    public func estimatedWidth() -> CGFloat {
         return sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)).width
     }
     
     public func fitHeight() {
-        self.height = getEstimatedHeight()
+        self.height = estimatedHeight()
     }
     
     public func fitWidth() {
-        self.width = getEstimatedWidth()
+        self.width = estimatedWidth()
     }
     
     public func fitSize() {

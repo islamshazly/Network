@@ -26,7 +26,7 @@ public extension UINavigationBar {
         shadowImage = UIImage()
     }
     
-    public func setColors(background: UIColor, text: UIColor) {
+    public func setBackgroundColor(background: UIColor, text: UIColor) {
         isTranslucent = false
         backgroundColor = background
         barTintColor = background

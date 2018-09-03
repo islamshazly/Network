@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - properties
+// MARK: - properties
 
 public extension UIImageView {
     
@@ -32,17 +32,10 @@ public extension UIImageView {
     }
 }
 
-//MARK: - Methods
+// MARK: - Methods
 
 public extension UIImageView {
     
-    public func disable() {
-        self.alpha = 0.5
-    }
-    
-    public func enable() {
-        self.alpha = 1
-    }
     
     public func ShowLoadingOnImage (){
         self.kf.indicatorType = .activity
@@ -53,16 +46,16 @@ public extension UIImageView {
         self.tintColor = color
     }
     
-    public func imageFromURL( _ url : String , placeHolder : UIImage?) {
+    public func imageFromURL(fromURL url : String, placeHolder : UIImage?) {
         self.kf.setImage(with: URL(string: url), placeholder: placeHolder , options: [.cacheOriginalImage], progressBlock: { (recivedSize,size) in
         }, completionHandler: nil)
     }
     
-    public func imageFromURL( _ url : String , placeHolder : UIImage? , clouser : @escaping  ((_ error : Error?) -> ())) {
+    public func imageFromURL(fromURL url : String, placeHolder : UIImage?, handler: @escaping  ((_ error : Error?) -> ())) {
         self.kf.setImage(with: URL(string: url), placeholder: placeHolder , options: [.cacheOriginalImage], progressBlock: { (recivedSize,size) in
         }, completionHandler: {
             (image, error, cashType, url) in
-            clouser(error)
+            handler(error)
         })
     }
     

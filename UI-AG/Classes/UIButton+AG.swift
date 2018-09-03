@@ -11,18 +11,9 @@ import UIKit
 // MARK: - Methods
 
 public extension UIButton {
+    
     private var states: [UIControlState] {
         return [.normal, .selected, .highlighted, .disabled]
-    }
-    
-    func disable() {
-        self.isEnabled = false
-        self.alpha = 0.5
-    }
-    
-    func enable() {
-        self.isEnabled = true
-        self.alpha = 1.0
     }
     
     func loadingIndicator(_ show: Bool) {

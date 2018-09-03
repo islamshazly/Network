@@ -3,51 +3,38 @@
 
 import UIKit
 
+// MARK: - properties
+
 public extension UITextField {
     
-    public enum TextType {
-        case emailAddress
-        case password
-        case generic
+    @IBInspectable var placeHolderColor: UIColor {
+        set {
+            self.attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [.foregroundColor: newValue])
+        } get {
+            return self.placeHolderColor
+        }
+    }
+    @IBInspectable var borderColor: CGColor {
+        set {
+            layer.borderColor = newValue
+        } get {
+            return layer.borderColor ?? UIColor.clear.cgColor
+        }
     }
     
-    public var textType: TextType {
-        get {
-            if keyboardType == .emailAddress {
-                return .emailAddress
-            } else if isSecureTextEntry {
-                return .password
-            }
-            return .generic
-        }
-        set {
-            switch newValue {
-            case .emailAddress:
-                keyboardType = .emailAddress
-                autocorrectionType = .no
-                autocapitalizationType = .none
-                isSecureTextEntry = false
-                placeholder = "Email Address"
-                
-            case .password:
-                keyboardType = .asciiCapable
-                autocorrectionType = .no
-                autocapitalizationType = .none
-                isSecureTextEntry = true
-                placeholder = "Password"
-                
-            case .generic:
-                isSecureTextEntry = false
-            }
-        }
-    }
     public var isEmpty: Bool {
         return text?.isEmpty == true
     }
 }
+
 // MARK: - Methods
 
 public extension UITextField {
+    
+    enum Direction {
+        case left
+        case right
+    }
     
     public func clear() {
         text = ""
@@ -59,17 +46,31 @@ public extension UITextField {
         self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }
     
-    public func addPaddingLeft(_ padding: CGFloat) {
+    public func addPaddingBy(value padding: CGFloat, for direction: Direction) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
-        leftView = paddingView
-        leftViewMode = .always
+        switch direction {
+        case .left:
+            leftView = paddingView
+            leftViewMode = .always
+        case .right:
+            rightView = paddingView
+            rightViewMode = .always
+        }
     }
     
-    public func addPaddingLeftIcon(_ image: UIImage, padding: CGFloat) {
+    public func addPaddingIcon(_ image: UIImage, padding: CGFloat, for direction: Direction) {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .center
-        self.leftView = imageView
-        self.leftView?.frame.size = CGSize(width: image.size.width + padding, height: image.size.height)
-        self.leftViewMode = UITextFieldViewMode.always
+        switch direction {
+        case .left:
+            leftView = imageView
+            leftView?.frame.size = CGSize(width: image.size.width + padding, height: image.size.height)
+            leftViewMode = .always
+        case .right:
+            rightView = imageView
+            rightView?.frame.size = CGSize(width: image.size.width + padding, height: image.size.height)
+            rightViewMode = .always
+        }
     }
+    
 }

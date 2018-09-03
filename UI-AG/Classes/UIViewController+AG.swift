@@ -38,16 +38,15 @@ extension UIViewController {
 
 extension UIViewController {
     
-    public static func topMostViewControllerWithRootViewController(root: UIViewController) -> UIViewController {
+    public func topMostViewController(with root: UIViewController) -> UIViewController {
         if let tab = root as? UITabBarController {
-            return self.topMostViewControllerWithRootViewController(root: tab.selectedViewController!)
+            return self.topMostViewController(with: tab.selectedViewController!)
         }
         if let nav = root as? UINavigationController {
-            return self.topMostViewControllerWithRootViewController(root:
-                nav.visibleViewController!)
+            return self.topMostViewController(with: nav.visibleViewController!)
         }
         if let presented = root.presentedViewController {
-            return self.topMostViewControllerWithRootViewController(root: presented)
+            return topMostViewController(with: presented)
         }
         
         return root

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum FontType: String {
+public enum weight: String {
     case None = ""
     case Regular = "Regular"
     case Bold = "Bold"
@@ -27,7 +27,7 @@ public enum FontType: String {
     case Heavy = "Heavy"
 }
 
-public enum FontName: String {
+public enum name: String {
     case HelveticaNeue
     case Helvetica
     case Futura
@@ -48,7 +48,7 @@ extension UIFont {
         self.init(name:fontname, size:fontSize)
     }
     
-    public class func Font(_ name: FontName, type: FontType, size: CGFloat) -> UIFont? {
+    public class func Font(_ name: name, type: weight, size: CGFloat) -> UIFont? {
         let fontName = name.rawValue + "-" + type.rawValue
         if let font = UIFont(name: fontName, size: size) {
             return font

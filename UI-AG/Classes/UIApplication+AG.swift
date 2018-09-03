@@ -1,6 +1,11 @@
 import UIKit
 
 public extension UIApplication {
+    
+   public static var statusBarOrientation: UIInterfaceOrientation {
+        return UIApplication.statusBarOrientation
+    }
+    
     static func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
        
         if let nav = base as? UINavigationController {

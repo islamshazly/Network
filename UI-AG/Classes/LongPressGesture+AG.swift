@@ -1,6 +1,6 @@
 //
 //  LongGesture+AG.swift
-//  Kingfisher
+//  
 //
 //  Created by islam Elshazly on 8/29/18.
 //
