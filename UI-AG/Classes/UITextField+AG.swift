@@ -42,7 +42,9 @@ public extension UITextField {
     }
     
     public func setPlaceHolderTextColor(_ color: UIColor) {
-        guard let holder = placeholder, !holder.isEmpty else { return }
+        guard let holder = placeholder, !holder.isEmpty else {
+            return
+        }
         self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }
     

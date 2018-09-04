@@ -9,15 +9,6 @@ public extension UIViewController {
         // http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
         return self.isViewLoaded && view.window != nil
     }
-    
-    public var isNavBarHidden: Bool {
-        get {
-            return (navigationController?.isNavigationBarHidden)!
-        }
-        set {
-            navigationController?.isNavigationBarHidden = newValue
-        }
-    }
 }
 
 extension UIViewController {
@@ -38,18 +29,18 @@ extension UIViewController {
 
 extension UIViewController {
     
-    public func topMostViewController(with root: UIViewController) -> UIViewController {
-        if let tab = root as? UITabBarController {
-            return self.topMostViewController(with: tab.selectedViewController!)
+    public func topMostViewController() -> UIViewController {
+        if let tab = self as? UITabBarController {
+            return tab.topMostViewController()
         }
-        if let nav = root as? UINavigationController {
-            return self.topMostViewController(with: nav.visibleViewController!)
+        if let nav = self as? UINavigationController {
+            return nav.topMostViewController()
         }
-        if let presented = root.presentedViewController {
-            return topMostViewController(with: presented)
+        if let presented = self.presentedViewController {
+            return presented.topMostViewController()
         }
         
-        return root
+        return self
     }
     
     public func isModal() -> Bool {
