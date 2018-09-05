@@ -10,7 +10,16 @@ import UIKit
 open class TapGesture: UITapGestureRecognizer {
     
     private var tapAction: ((UITapGestureRecognizer) -> Void)?
-    
+    public var tapCount: Int = 1 {
+        didSet {
+            self.numberOfTapsRequired = tapCount
+        }
+    }
+    public var fingerCount: Int = 1 {
+        didSet {
+            self.numberOfTouchesRequired = fingerCount
+        }
+    }
     public override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)
     }

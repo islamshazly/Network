@@ -41,25 +41,13 @@ public extension UIButton {
         }
     }
     
-    func imageWith(color:UIColor, for: UIControlState) {
+    func image(to color: UIColor, for: UIControlState) {
         if let imageForState = self.image(for: state) {
             self.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
             let colorizedImage = imageForState.image(withTintColor: color)
             self.setImage(colorizedImage, for: state)
             self.tintColor = color
         }
-    }
-    
-    public func setImageForAllStates(_ image: UIImage) {
-        states.forEach { self.setImage(image, for: $0) }
-    }
-
-    public func setTitleColorForAllStates(_ color: UIColor) {
-        states.forEach { self.setTitleColor(color, for: $0) }
-    }
-    
-    public func setTitleForAllStates(_ title: String) {
-        states.forEach { self.setTitle(title, for: $0) }
     }
     
     public func centerTextAndImage(spacing: CGFloat) {

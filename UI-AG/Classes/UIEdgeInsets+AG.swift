@@ -24,7 +24,7 @@ extension UIEdgeInsets {
         self.init(top: vertical/2, left: horizontal/2, bottom: vertical/2, right: horizontal/2)
     }
     
-    public func insetBy(value : CGFloat,To side: InsetSide) -> UIEdgeInsets {
+    public func inset(side: InsetSide, by value : CGFloat) -> UIEdgeInsets {
         switch side
         {
             

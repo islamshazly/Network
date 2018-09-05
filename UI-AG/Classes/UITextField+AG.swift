@@ -48,8 +48,8 @@ public extension UITextField {
         self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }
     
-    public func addPaddingBy(value padding: CGFloat, for direction: Direction) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
+    public func addPadding(By value: CGFloat, for direction: Direction) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: value, height: frame.height))
         switch direction {
         case .left:
             leftView = paddingView
@@ -63,14 +63,15 @@ public extension UITextField {
     public func addPaddingIcon(_ image: UIImage, padding: CGFloat, for direction: Direction) {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .center
+        let viewSize = CGSize(width: image.size.width + padding, height: image.size.height)
         switch direction {
         case .left:
             leftView = imageView
-            leftView?.frame.size = CGSize(width: image.size.width + padding, height: image.size.height)
+            leftView?.frame.size = viewSize
             leftViewMode = .always
         case .right:
             rightView = imageView
-            rightView?.frame.size = CGSize(width: image.size.width + padding, height: image.size.height)
+            rightView?.frame.size = viewSize
             rightViewMode = .always
         }
     }

@@ -37,7 +37,7 @@ public extension UIImageView {
 public extension UIImageView {
     
     
-    public func ShowLoadingOnImage (){
+    public func showLoadingOnImage (){
         self.kf.indicatorType = .activity
     }
     

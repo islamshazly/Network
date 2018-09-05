@@ -1,4 +1,4 @@
-# UI-AG
+# UI+AG
 
 [![CI Status](https://img.shields.io/travis/islamshazly/UI-AG.svg?style=flat)](https://travis-ci.org/islamshazly/UI-AG)
 [![Version](https://img.shields.io/cocoapods/v/UI-AG.svg?style=flat)](https://cocoapods.org/pods/UI-AG)

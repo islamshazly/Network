@@ -24,5 +24,5 @@ Pod::Spec.new do |s|
   s.source_files = 'UI-AG/Classes/**/*'
   
   s.frameworks = 'UIKit'
-  s.dependency 'Kingfisher' 
+  s.dependency 'Kingfisher'
 end

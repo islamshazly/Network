@@ -162,31 +162,34 @@ extension UIView {
 
 // MARK: Transform Extensions
 
+private let CATransform3DM34: CGFloat = 1.0 / -1000.0
+
 extension UIView {
+
     public func setRotationX(_ x: CGFloat) {
         var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
+        transform.m34 = CATransform3DM34
         transform = CATransform3DRotate(transform, x.degreesToRadians, 1.0, 0.0, 0.0)
         self.layer.transform = transform
     }
     
     public func setRotationY(_ y: CGFloat) {
         var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
+        transform.m34 = CATransform3DM34
         transform = CATransform3DRotate(transform, y.degreesToRadians, 0.0, 1.0, 0.0)
         self.layer.transform = transform
     }
     
     public func setRotationZ(_ z: CGFloat) {
         var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
+        transform.m34 = CATransform3DM34
         transform = CATransform3DRotate(transform, z.degreesToRadians, 0.0, 0.0, 1.0)
         self.layer.transform = transform
     }
     
     public func setRotation(x: CGFloat, y: CGFloat, z: CGFloat) {
         var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
+        transform.m34 = CATransform3DM34
         transform = CATransform3DRotate(transform, x.degreesToRadians, 1.0, 0.0, 0.0)
         transform = CATransform3DRotate(transform, y.degreesToRadians, 0.0, 1.0, 0.0)
         transform = CATransform3DRotate(transform, z.degreesToRadians, 0.0, 0.0, 1.0)
@@ -195,7 +198,7 @@ extension UIView {
     
     public func setScale(x: CGFloat, y: CGFloat) {
         var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
+        transform.m34 = CATransform3DM34
         transform = CATransform3DScale(transform, x, y, 1)
         self.layer.transform = transform
     }
@@ -207,6 +210,17 @@ extension UIView {
 private let UIViewAnimationDuration: TimeInterval = 1
 private let UIViewAnimationSpringDamping: CGFloat = 0.5
 private let UIViewAnimationSpringVelocity: CGFloat = 0.5
+
+private let UIViewAnimationDurationPop: TimeInterval = 0.2
+private let UIViewAnimationScalePop: CGFloat = 1.1
+
+private let UIViewAnimationDurationPopBig: TimeInterval = 0.2
+private let UIViewAnimationScalePopBig: CGFloat = 1.25
+
+private let UIViewAnimationDurationReversePop: TimeInterval = 0.05
+private let UIViewAnimationScaleReversePop: CGFloat = 0.0
+
+private let UIViewAnimationScaleOriginal: CGFloat = 1.0
 
 public extension UIView {
     
@@ -245,23 +259,23 @@ public extension UIView {
     }
     
     public func pop() {
-        setScale(x: 1.1, y: 1.1)
-        spring(duration: 0.2, animations: { [unowned self] () -> Void in
-            self.setScale(x: 1, y: 1)
+        setScale(x: UIViewAnimationScalePop, y: UIViewAnimationScalePop)
+        spring(duration: UIViewAnimationDurationPop, animations: { [unowned self] () -> Void in
+            self.setScale(x: UIViewAnimationScaleOriginal, y: UIViewAnimationScaleOriginal)
         })
     }
     
     public func popBig() {
-        setScale(x: 1.25, y: 1.25)
-        spring(duration: 0.2, animations: { [unowned self] () -> Void in
-            self.setScale(x: 1, y: 1)
+        setScale(x: UIViewAnimationScalePopBig, y: UIViewAnimationScalePopBig)
+        spring(duration: UIViewAnimationDurationPopBig, animations: { [unowned self] () -> Void in
+            self.setScale(x: UIViewAnimationScaleOriginal, y: UIViewAnimationScaleOriginal)
         })
     }
     
     public func reversePop() {
-        setScale(x: 0.9, y: 0.9)
-        UIView.animate(withDuration: 0.05, delay: 0, options: .allowUserInteraction, animations: {[weak self] in
-            self?.setScale(x: 1, y: 1)
+        setScale(x: UIViewAnimationScaleReversePop, y: UIViewAnimationScaleReversePop)
+        UIView.animate(withDuration: UIViewAnimationDurationReversePop, delay: 0, options: .allowUserInteraction, animations: {[weak self] in
+            self?.setScale(x: UIViewAnimationScaleOriginal, y: UIViewAnimationScaleOriginal)
             }, completion: { (_) in })
     }
     
@@ -278,7 +292,7 @@ public extension UIView {
     }
     
     public func addSwipeGesture(direction: UISwipeGestureRecognizerDirection, fingerCount: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
-        let tap = SwipeGesture(direction: direction, fingerCount: fingerCount, action: action)
+        let tap = SwipeGesture(direction: direction,fingerCount: fingerCount, action: action)
         addGestureRecognizer(tap)
         isUserInteractionEnabled = true
     }

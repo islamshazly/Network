@@ -9,6 +9,16 @@ import UIKit
 open class SwipeGesture: UISwipeGestureRecognizer {
     
     private var swipeAction: ((UISwipeGestureRecognizer) -> Void)?
+    public var fingerCount: Int = 1 {
+        didSet {
+            numberOfTouchesRequired = fingerCount
+        }
+    }
+    public var swipedirection: UISwipeGestureRecognizerDirection = .down {
+        didSet {
+            self.direction = swipedirection
+        }
+    }
     
     public override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)

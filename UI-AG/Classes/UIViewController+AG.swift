@@ -33,8 +33,8 @@ extension UIViewController {
         if let tab = self as? UITabBarController {
             return tab.topMostViewController()
         }
-        if let nav = self as? UINavigationController {
-            return nav.topMostViewController()
+        if let navigation = self as? UINavigationController {
+            return navigation.topMostViewController()
         }
         if let presented = self.presentedViewController {
             return presented.topMostViewController()
@@ -49,12 +49,12 @@ extension UIViewController {
             || self.tabBarController?.presentingViewController is UITabBarController
     }
     
-    open func popVC() {
+    open func popViewController() {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    open func pushVC(_ vc: UIViewController) {
-        navigationController?.pushViewController(vc, animated: true)
+    open func pushViewController(_ viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
 }
