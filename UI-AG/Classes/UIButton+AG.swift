@@ -16,7 +16,7 @@ public extension UIButton {
         return [.normal, .selected, .highlighted, .disabled]
     }
     
-    func loadingIndicator(_ show: Bool) {
+    public func loadingIndicator(_ show: Bool) {
         let tag = 808404
         if show {
             self.imageView?.isHidden = true
@@ -41,7 +41,7 @@ public extension UIButton {
         }
     }
     
-    func image(to color: UIColor, for: UIControlState) {
+    public func image(to color: UIColor, for: UIControlState) {
         if let imageForState = self.image(for: state) {
             self.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
             let colorizedImage = imageForState.image(withTintColor: color)
