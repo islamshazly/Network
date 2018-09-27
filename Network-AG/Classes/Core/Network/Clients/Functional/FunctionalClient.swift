@@ -45,14 +45,13 @@ public extension FunctionalClient {
         }
     }
     
-    public func startRequest<T, A>(request: A, mappingClass: T, withResult result: Result<NetworkResponse>) where T : Mappable, A : APIRequest {
+    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: ResultHandler ) {
         
         Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseJSON { [weak self] (response :DataResponse<Any>) in
             
             switch response.result {
             case .success(_):
                 if let data = response.result.value {
-                    
                     self?.logger(with: "Response:", data: data)
                     let model = Mapper<T>().map(JSONObject: data, toObject: mappingClass)
                 }
