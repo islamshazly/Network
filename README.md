@@ -10,7 +10,9 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
-
+Have an access of Areeb Private in house repo 
+ios: 10 
+install ruby cocoa pod 
 ## Installation
 
 Network-AG is available through [CocoaPods](https://cocoapods.org). To install
