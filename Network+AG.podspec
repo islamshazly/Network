@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Network-AG'
+  s.name             = 'Network+AG'
   s.version          = '0.1.0'
   s.summary          = 'Netowrk layer for Areeb Group'
 

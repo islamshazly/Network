@@ -16,6 +16,7 @@
 		6F37C1ADC3C446F579CA3573 /* Pods_Network_AG_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429B20ECBB3C367F96356813 /* Pods_Network_AG_Example.framework */; };
 		9B0CA830215D04000030456D /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0CA82F215D04000030456D /* user.swift */; };
 		9B0CA832215D05CE0030456D /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0CA831215D05CE0030456D /* UserAPI.swift */; };
+		9B0CA839215D14CF0030456D /* Network+AG.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9B0CA838215D14CF0030456D /* Network+AG.podspec */; };
 		FF178EC5D9617A01A2E42A39 /* Pods_Network_AG_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE490400E9053C73F6A9A9E /* Pods_Network_AG_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +34,6 @@
 		02FC14BA40CAE3FFC975E014 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		41ABB925982D13DAAAEE72D3 /* Pods-Network-AG_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network-AG_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Network-AG_Tests/Pods-Network-AG_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		429B20ECBB3C367F96356813 /* Pods_Network_AG_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Network_AG_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5DFC83A09EB94920A52E3730 /* Network-AG.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "Network-AG.podspec"; path = "../Network-AG.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACD01AFB9204008FA782 /* Network-AG_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Network-AG_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +50,7 @@
 		92809E2A114FECE1DE42E7B7 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9B0CA82F215D04000030456D /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		9B0CA831215D05CE0030456D /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		9B0CA838215D14CF0030456D /* Network+AG.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = "Network+AG.podspec"; path = "../Network+AG.podspec"; sourceTree = "<group>"; };
 		F0FD30B2198B7C7AA41B16B5 /* Pods-Network-AG_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network-AG_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Network-AG_Example/Pods-Network-AG_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,7 +150,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				5DFC83A09EB94920A52E3730 /* Network-AG.podspec */,
+				9B0CA838215D14CF0030456D /* Network+AG.podspec */,
 				92809E2A114FECE1DE42E7B7 /* README.md */,
 				02FC14BA40CAE3FFC975E014 /* LICENSE */,
 			);
@@ -254,6 +255,7 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				9B0CA839215D14CF0030456D /* Network+AG.podspec in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
