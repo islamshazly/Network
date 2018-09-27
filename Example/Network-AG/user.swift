@@ -31,6 +31,7 @@ class User: Mappable {
 
 extension User: FunctionalClient {
     
+    
     func getprofile() {
         
         startRequest(request: userRequest, mappingClass: self, with: { (model) in

@@ -10,9 +10,11 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
+
 public protocol FunctionalClient: APIClient {
     
     var request: APIRequest? {get set}
+    
 }
 
 public extension FunctionalClient {
@@ -38,6 +40,27 @@ public extension FunctionalClient {
             case .failure(_):
                 self?.logger(with: "Error: ", data: response.result.error?.localizedDescription)
                 failureHandler(response.result.error)
+                break
+            }
+        }
+    }
+    
+    public func startRequest<T, A>(request: A, mappingClass: T, withResult result: Result<NetworkResponse>) where T : Mappable, A : APIRequest {
+        
+        Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseJSON { [weak self] (response :DataResponse<Any>) in
+            
+            switch response.result {
+            case .success(_):
+                if let data = response.result.value {
+                    
+                    self?.logger(with: "Response:", data: data)
+                    let model = Mapper<T>().map(JSONObject: data, toObject: mappingClass)
+                }
+                break
+                
+            case .failure(_):
+                self?.logger(with: "Error: ", data: response.result.error?.localizedDescription)
+                
                 break
             }
         }
