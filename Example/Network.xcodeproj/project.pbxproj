@@ -17,6 +17,8 @@
 		9B0CA830215D04000030456D /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0CA82F215D04000030456D /* user.swift */; };
 		9B0CA832215D05CE0030456D /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0CA831215D05CE0030456D /* UserAPI.swift */; };
 		9B0CA839215D14CF0030456D /* Network+AG.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9B0CA838215D14CF0030456D /* Network+AG.podspec */; };
+		A45EB69DCB3A905E7AA7358A /* Pods_Network_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BFA730FC1A14EC86948A6A8 /* Pods_Network_Example.framework */; };
+		E0229C9E8BD3D21660DA5F79 /* Pods_Network_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050297A68F18B20E866C0F1E /* Pods_Network_Tests.framework */; };
 		FF178EC5D9617A01A2E42A39 /* Pods_Network_AG_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE490400E9053C73F6A9A9E /* Pods_Network_AG_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,21 +34,27 @@
 
 /* Begin PBXFileReference section */
 		02FC14BA40CAE3FFC975E014 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		050297A68F18B20E866C0F1E /* Pods_Network_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Network_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D0F388D62A7DCEA82FE7FE6 /* Pods-Network_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Network_Tests/Pods-Network_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		3C3C6BDBAC48C46701C3D88A /* Pods-Network_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Network_Example/Pods-Network_Example.release.xcconfig"; sourceTree = "<group>"; };
 		41ABB925982D13DAAAEE72D3 /* Pods-Network-AG_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network-AG_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Network-AG_Tests/Pods-Network-AG_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		429B20ECBB3C367F96356813 /* Pods_Network_AG_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Network_AG_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACD01AFB9204008FA782 /* Network-AG_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Network-AG_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DF32F6AB3B4293569480B1 /* Pods-Network_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Network_Tests/Pods-Network_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		4BFA730FC1A14EC86948A6A8 /* Pods_Network_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Network_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* Network_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Network_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* Network-AG_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network-AG_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACE51AFB9204008FA782 /* Network_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Network_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		68AC50B38682125CDC4FD11E /* Pods-Network-AG_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network-AG_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Network-AG_Example/Pods-Network-AG_Example.release.xcconfig"; sourceTree = "<group>"; };
 		7DFEFF1473EA92AE253AEA9B /* Pods-Network-AG_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network-AG_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Network-AG_Tests/Pods-Network-AG_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8BE490400E9053C73F6A9A9E /* Pods_Network_AG_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Network_AG_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9126EE3AD60E21265F4537F3 /* Pods-Network_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Network_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Network_Example/Pods-Network_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		92809E2A114FECE1DE42E7B7 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9B0CA82F215D04000030456D /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		9B0CA831215D05CE0030456D /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
@@ -60,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F37C1ADC3C446F579CA3573 /* Pods_Network_AG_Example.framework in Frameworks */,
+				A45EB69DCB3A905E7AA7358A /* Pods_Network_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF178EC5D9617A01A2E42A39 /* Pods_Network_AG_Tests.framework in Frameworks */,
+				E0229C9E8BD3D21660DA5F79 /* Pods_Network_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +91,10 @@
 				68AC50B38682125CDC4FD11E /* Pods-Network-AG_Example.release.xcconfig */,
 				41ABB925982D13DAAAEE72D3 /* Pods-Network-AG_Tests.debug.xcconfig */,
 				7DFEFF1473EA92AE253AEA9B /* Pods-Network-AG_Tests.release.xcconfig */,
+				9126EE3AD60E21265F4537F3 /* Pods-Network_Example.debug.xcconfig */,
+				3C3C6BDBAC48C46701C3D88A /* Pods-Network_Example.release.xcconfig */,
+				49DF32F6AB3B4293569480B1 /* Pods-Network_Tests.debug.xcconfig */,
+				1D0F388D62A7DCEA82FE7FE6 /* Pods-Network_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -100,8 +114,8 @@
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* Network-AG_Example.app */,
-				607FACE51AFB9204008FA782 /* Network-AG_Tests.xctest */,
+				607FACD01AFB9204008FA782 /* Network_Example.app */,
+				607FACE51AFB9204008FA782 /* Network_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +176,8 @@
 			children = (
 				429B20ECBB3C367F96356813 /* Pods_Network_AG_Example.framework */,
 				8BE490400E9053C73F6A9A9E /* Pods_Network_AG_Tests.framework */,
+				4BFA730FC1A14EC86948A6A8 /* Pods_Network_Example.framework */,
+				050297A68F18B20E866C0F1E /* Pods_Network_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,9 +185,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* Network-AG_Example */ = {
+		607FACCF1AFB9204008FA782 /* Network_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network-AG_Example" */;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network_Example" */;
 			buildPhases = (
 				E3412123BBE68424EB2B8A2D /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
@@ -183,14 +199,14 @@
 			);
 			dependencies = (
 			);
-			name = "Network-AG_Example";
+			name = Network_Example;
 			productName = "Network-AG";
-			productReference = 607FACD01AFB9204008FA782 /* Network-AG_Example.app */;
+			productReference = 607FACD01AFB9204008FA782 /* Network_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		607FACE41AFB9204008FA782 /* Network-AG_Tests */ = {
+		607FACE41AFB9204008FA782 /* Network_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network-AG_Tests" */;
+			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network_Tests" */;
 			buildPhases = (
 				B0060C711ECBD60BEA8DAD5A /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
@@ -202,9 +218,9 @@
 			dependencies = (
 				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
 			);
-			name = "Network-AG_Tests";
+			name = Network_Tests;
 			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* Network-AG_Tests.xctest */;
+			productReference = 607FACE51AFB9204008FA782 /* Network_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -229,7 +245,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Network-AG" */;
+			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Network" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -242,8 +258,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* Network-AG_Example */,
-				607FACE41AFB9204008FA782 /* Network-AG_Tests */,
+				607FACCF1AFB9204008FA782 /* Network_Example */,
+				607FACE41AFB9204008FA782 /* Network_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,22 +292,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Network-AG_Example/Pods-Network-AG_Example-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Network_Example/Pods-Network_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkLogger/AlamofireNetworkLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/Network+AG/Network_AG.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Network_AG.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Network-AG_Example/Pods-Network-AG_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Network_Example/Pods-Network_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B0060C711ECBD60BEA8DAD5A /* [CP] Check Pods Manifest.lock */ = {
@@ -305,7 +319,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Network-AG_Tests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Network_Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -323,7 +337,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Network-AG_Example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Network_Example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -357,7 +371,7 @@
 /* Begin PBXTargetDependency section */
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* Network-AG_Example */;
+			target = 607FACCF1AFB9204008FA782 /* Network_Example */;
 			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -483,7 +497,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0FD30B2198B7C7AA41B16B5 /* Pods-Network-AG_Example.debug.xcconfig */;
+			baseConfigurationReference = 9126EE3AD60E21265F4537F3 /* Pods-Network_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -502,7 +516,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68AC50B38682125CDC4FD11E /* Pods-Network-AG_Example.release.xcconfig */;
+			baseConfigurationReference = 3C3C6BDBAC48C46701C3D88A /* Pods-Network_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -521,7 +535,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41ABB925982D13DAAAEE72D3 /* Pods-Network-AG_Tests.debug.xcconfig */;
+			baseConfigurationReference = 49DF32F6AB3B4293569480B1 /* Pods-Network_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -537,13 +551,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Network-AG_Example.app/Network-AG_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Network_Example.app/Network_Example";
 			};
 			name = Debug;
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7DFEFF1473EA92AE253AEA9B /* Pods-Network-AG_Tests.release.xcconfig */;
+			baseConfigurationReference = 1D0F388D62A7DCEA82FE7FE6 /* Pods-Network_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -555,14 +569,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Network-AG_Example.app/Network-AG_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Network_Example.app/Network_Example";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Network-AG" */ = {
+		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Network" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACED1AFB9204008FA782 /* Debug */,
@@ -571,7 +585,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network-AG_Example" */ = {
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
@@ -580,7 +594,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network-AG_Tests" */ = {
+		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Network_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,

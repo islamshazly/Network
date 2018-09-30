@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Network_AG
+import Network
 
 class ViewController: UIViewController {
    
@@ -19,11 +19,6 @@ class ViewController: UIViewController {
         user.getProfileResult()
 //        user.getProfile()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
 }
 

@@ -19,6 +19,7 @@ public protocol FunctionalClient: APIClient {
 public extension FunctionalClient {
 
     func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: @escaping ResultHandler) {
+
         
         Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseJSON { [weak self] (response :DataResponse<Any>) in
             
