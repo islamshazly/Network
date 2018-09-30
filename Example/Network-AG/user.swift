@@ -31,23 +31,13 @@ class User: Mappable {
 
 extension User: FunctionalClient {
     
-    
-    func getprofile() {
-        
-        startRequest(request: userRequest, mappingClass: self, with: { (model) in
-            print(model)
-        }) { (error) in
-            print(error)
-        }
-    }
-    
     func getProfileResult() {
         
         startRequest(request: userRequest, mappingClass: self) { result in
             switch result {
-            case .success(let model):
+            case .success( _):
                 break
-            case .failure(let error):
+            case .failure( _):
                 break
             }
         }

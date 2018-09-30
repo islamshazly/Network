@@ -16,7 +16,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let user = User()
-        user.getprofile()
+        user.getProfileResult()
+//        user.getProfile()
     }
 
     override func didReceiveMemoryWarning() {

@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
   s.frameworks = 'Foundation'
   s.dependency 'Alamofire', '~> 4.7'
   s.dependency 'ObjectMapper', '~> 3.3'
-  s.dependency 'XCGLogger', '~> 6.1.0'
+  s.dependency 'AlamofireNetworkLogger'
   
 end
