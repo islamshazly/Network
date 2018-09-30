@@ -40,5 +40,16 @@ extension User: FunctionalClient {
             print(error)
         }
     }
+    
+    func getProfileResult() {
+        
+        startRequest(request: userRequest, mappingClass: self) { result in
+            switch result {
+            case .success(let model):
+                break
+            case .failure(let error):
+                break
+            }
+        }
+    }
 }
-

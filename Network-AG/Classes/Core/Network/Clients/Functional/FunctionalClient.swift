@@ -45,7 +45,7 @@ public extension FunctionalClient {
         }
     }
     
-    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: ResultHandler ) {
+    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: @escaping ResultHandler) {
         
         Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseJSON { [weak self] (response :DataResponse<Any>) in
             
@@ -54,10 +54,13 @@ public extension FunctionalClient {
                 if let data = response.result.value {
                     self?.logger(with: "Response:", data: data)
                     let model = Mapper<T>().map(JSONObject: data, toObject: mappingClass)
+                    result(.success(model))
                 }
                 break
                 
             case .failure(_):
+                let error = response.result.error
+                result(.failure(error!))
                 self?.logger(with: "Error: ", data: response.result.error?.localizedDescription)
                 
                 break
