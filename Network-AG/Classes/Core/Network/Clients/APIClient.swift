@@ -23,10 +23,9 @@ public typealias ResultHandler = (APIResult<Mappable, Error>) -> Void
 public protocol APIClient: class {
     
     func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, with successHandler: @escaping NetworkSuccessClosure, failureHandler: @escaping NetworkFailureClosure)
-    
-    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: ResultHandler )
-
+    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: ResultHandler)
     func restartLastRequest(successHandler: NetworkSuccessClosure, failureHandler: NetworkFailureClosure)
     func restartFailedRequests(successHandler: NetworkSuccessClosure, failureHandler: NetworkFailureClosure)
     func cancelRequests()
+    
 }
