@@ -26,8 +26,6 @@ extension Alamofire.DataRequest {
                 result(.failure(response.result.error!))
             } else {
                 do {
-                    print(T.self)
-                    print("loggg")
                     let decoder = JSONDecoder()
                     let responseObject = try? decoder.decode(T.self, from: response.data!)
                     result(.success(responseObject))
@@ -44,9 +42,6 @@ extension Alamofire.DataRequest {
 public extension FunctionalClient {
     
     public func startRequest<T, A>(request: A, mappingClass: T, withResult result: @escaping ResultHandler) where T: Decodable, A: APIRequest {
-        
-        print(T.self)
-        print("logasdasdgg")
         
         Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseObject(model: T.self) { (resultHandler) in
             switch resultHandler {
