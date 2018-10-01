@@ -18,6 +18,9 @@ class ViewController: UIViewController {
         let user = User()
         user.getProfileResult()
 //        user.getProfile()
+        
+        let userDecode = UserDecodable()
+        userDecode.getProfileResult()
     }
     
 }

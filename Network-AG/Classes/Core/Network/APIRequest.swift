@@ -18,6 +18,5 @@ public protocol APIRequest {
     var parameterEncoding: ParameterEncoding {get}
     var headers: [String : String]? {get}
     var parameters: [String: Any]?  {get}
-    
 }
 

@@ -13,13 +13,11 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		6F37C1ADC3C446F579CA3573 /* Pods_Network_AG_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429B20ECBB3C367F96356813 /* Pods_Network_AG_Example.framework */; };
 		9B0CA830215D04000030456D /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0CA82F215D04000030456D /* user.swift */; };
 		9B0CA832215D05CE0030456D /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0CA831215D05CE0030456D /* UserAPI.swift */; };
 		9B0CA839215D14CF0030456D /* Network+AG.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9B0CA838215D14CF0030456D /* Network+AG.podspec */; };
 		A45EB69DCB3A905E7AA7358A /* Pods_Network_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BFA730FC1A14EC86948A6A8 /* Pods_Network_Example.framework */; };
 		E0229C9E8BD3D21660DA5F79 /* Pods_Network_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050297A68F18B20E866C0F1E /* Pods_Network_Tests.framework */; };
-		FF178EC5D9617A01A2E42A39 /* Pods_Network_AG_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE490400E9053C73F6A9A9E /* Pods_Network_AG_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F37C1ADC3C446F579CA3573 /* Pods_Network_AG_Example.framework in Frameworks */,
 				A45EB69DCB3A905E7AA7358A /* Pods_Network_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF178EC5D9617A01A2E42A39 /* Pods_Network_AG_Tests.framework in Frameworks */,
 				E0229C9E8BD3D21660DA5F79 /* Pods_Network_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,13 +291,17 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Network_Example/Pods-Network_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Network+AG/Network_AG.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Network_AG.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import XCGLogger
 
 public protocol FunctionalClient: APIClient {
     
@@ -16,30 +17,48 @@ public protocol FunctionalClient: APIClient {
     
 }
 
-public extension FunctionalClient {
-
-    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: @escaping ResultHandler) {
-
-        
-        Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseJSON { [weak self] (response :DataResponse<Any>) in
+extension Alamofire.DataRequest {
+    
+    func responseObject<T: Decodable>(model : T.Type, result: @escaping ResultHandler) {
+        self.responseJSON { (response: DataResponse<Any>) in
             
-            switch response.result {
-            case .success(_):
-                if let data = response.result.value {
-                    self?.logger(with: "Response:", data: data)
-                    let model = Mapper<T>().map(JSONObject: data, toObject: mappingClass)
-                    result(.success(model))
+            if response.result.error != nil {
+                result(.failure(response.result.error!))
+            } else {
+                do {
+                    print(T.self)
+                    print("loggg")
+                    let decoder = JSONDecoder()
+                    let responseObject = try? decoder.decode(T.self, from: response.data!)
+                    result(.success(responseObject))
+                } catch let error  {
+                    result(.failure(error))
                 }
+            }
+        }
+    }
+    
+}
+
+
+public extension FunctionalClient {
+    
+    public func startRequest<T, A>(request: A, mappingClass: T, withResult result: @escaping ResultHandler) where T: Decodable, A: APIRequest {
+        
+        print(T.self)
+        print("logasdasdgg")
+        
+        Alamofire.request(request.path, method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: request.headers).responseObject(model: T.self) { (resultHandler) in
+            switch resultHandler {
+            case .success(let model):
+                result(.success(model))
                 break
-                
-            case .failure(_):
-                let error = response.result.error
-                result(.failure(error!))
-                self?.logger(with: "Error: ", data: response.result.error?.localizedDescription)
-                
+            case.failure(let error):
+                result(.failure(error))
                 break
             }
         }
+        
     }
     
     func restartLastRequest(_ result: @escaping ResultHandler) {
@@ -54,11 +73,10 @@ public extension FunctionalClient {
         
     }
     
-    func logger(with title: String, data:Any) {
-        #if DEBUG
-        print(title + "Request URL: \(String(describing: data))")
-        #endif
+    func logRequest() {
+        
+        
     }
+    
 }
-
 

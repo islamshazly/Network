@@ -15,11 +15,11 @@ public enum APIResult<Value, Error> {
     case failure(Swift.Error)
 }
 
-public typealias ResultHandler = (APIResult<Mappable, Swift.Error>) -> Void
+public typealias ResultHandler = (APIResult<Decodable, Swift.Error>) -> Void
 
 public protocol APIClient: class {
     
-    func startRequest<T: Mappable, A: APIRequest>(request: A, mappingClass: T, withResult result: @escaping ResultHandler)
+    func startRequest<T: Decodable, A: APIRequest>(request: A, mappingClass: T, withResult result: @escaping ResultHandler)
     func restartLastRequest(_ result: @escaping ResultHandler)
     func restartFailedRequests(_ result: @escaping ResultHandler)
     func cancelRequests()
