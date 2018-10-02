@@ -36,7 +36,7 @@ extension APIClient {
     public func start<T>(request: Request, result: @escaping ResultHandler<T>) where T: Decodable {
         
         logRequest(request)
-        let dataRequest = sharedSessionManager.request(request.path, method: request.method,
+        sharedSessionManager.request(request.path, method: request.method,
                                      parameters: request.parameters,
                                      encoding: request.parameterEncoding,
                                      headers: request.headers).responseObject { (response: DataResponse<T>) in
@@ -45,7 +45,6 @@ extension APIClient {
                                             result(.success(model))
                                             break
                                         case.failure(let error):
-                                            XCGLogger.default.debug("======= Error =======")
                                             result(.failure(error))
                                             break
                                         }
