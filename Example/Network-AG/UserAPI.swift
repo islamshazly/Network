@@ -10,15 +10,12 @@ import Foundation
 import Network_AG
 import Alamofire
 
-enum UserAPI: APIRequest {
+enum UserAPI: Network_AG.Request {
+    
     
     case login
     case logout
     case signup
-    
-    var shouldRetry: Bool {
-        return false
-    }
     
     var baseURL: URL {
         return URL(string: "http://api.emiratesauction.com/v2/carsonline")!
@@ -60,17 +57,19 @@ enum UserAPI: APIRequest {
     }
     
     var headers: [String : String]? {
-        return ["" : ""]
+        return [:]
     }
     
     var parameters: [String : Any]? {
+        
         switch self {
         case .login:
-            return ["" : ""]
+            return [:]
         case.logout:
-            return ["" : ""]
+            return [:]
         case.signup:
-            return ["" : ""]
+            return [:]
         }
     }
+    
 }

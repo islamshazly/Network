@@ -6,17 +6,16 @@
 //  Copyright © 2018 Areeb Group. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
-public protocol APIRequest {
+public protocol Request {
     
-    var shouldRetry: Bool {get}
     var baseURL: URL {get}
     var path: String {get}
     var method: Alamofire.HTTPMethod {get}
     var parameterEncoding: ParameterEncoding {get}
     var headers: [String : String]? {get}
     var parameters: [String: Any]?  {get}
+    
 }
 

@@ -7,21 +7,26 @@
 //
 
 import UIKit
-import Network
+import Network_AG
 
-class ViewController: UIViewController {
-   
+final class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let user = User()
-        user.getProfileResult()
-//        user.getProfile()
         
         let userDecode = UserDecodable()
         userDecode.getProfileResult()
+        
+        DooboCLient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
+            
+            switch result {
+            case .success(let model):
+                print(model.refreshInterval)
+            case.failure(let error):
+                print(error)
+            }
+        }
+        
     }
-    
 }
 

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 import Alamofire
 
 public enum APIResult<Value, Error> {
@@ -15,13 +14,39 @@ public enum APIResult<Value, Error> {
     case failure(Swift.Error)
 }
 
-public typealias ResultHandler = (APIResult<Decodable, Swift.Error>) -> Void
+public typealias ResultHandler<T> = (APIResult<T, Swift.Error>) -> Void
 
 public protocol APIClient: class {
     
-    func startRequest<T: Decodable, A: APIRequest>(request: A, mappingClass: T, withResult result: @escaping ResultHandler)
-    func restartLastRequest(_ result: @escaping ResultHandler)
-    func restartFailedRequests(_ result: @escaping ResultHandler)
-    func cancelRequests()
+    // MARK: -  Properties
     
+    var baseUrl: String { get }
+    var defaultHeaders: [String: String] { get }
+    var sharedSessionManager: SessionManager { get set }
+    
+    // MARK: - Public functions
+    
+    func start<T: Decodable>(request: Request, result: @escaping ResultHandler<T>)
+    
+}
+
+extension APIClient {
+    
+    public func start<T>(request: Request, result: @escaping ResultHandler<T>) where T: Decodable {
+        
+        sharedSessionManager.request(request.path, method: request.method,
+                                     parameters: request.parameters,
+                                     encoding: request.parameterEncoding,
+                                     headers: request.headers).responseObject { (response: DataResponse<T>) in
+                                        switch response.result {
+                                        case .success(let model):
+                                            result(.success(model))
+                                            break
+                                        case.failure(let error):
+                                            result(.failure(error))
+                                            break
+                                        }
+        }
+        
+    }
 }
