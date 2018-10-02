@@ -36,10 +36,8 @@ extension APIClient {
     public func start<T>(request: Request, result: @escaping ResultHandler<T>) where T: Decodable {
         
         logRequest(request)
-        sharedSessionManager.request(request.path, method: request.method,
-                                     parameters: request.parameters,
-                                     encoding: request.parameterEncoding,
-                                     headers: request.headers).responseObject { (response: DataResponse<T>) in
+        sharedSessionManager.request(request)
+                            .responseObject { (response: DataResponse<T>) in
                                         switch response.result {
                                         case .success(let model):
                                             result(.success(model))
@@ -63,7 +61,7 @@ extension APIClient {
         XCGLogger.default.debug("= Paramters " + String(describing: request.parameters))
         XCGLogger.default.debug("= Hedaers " + String(describing: request.headers))
         XCGLogger.default.debug("= HTTPMethod " + String(describing: request.method))
-        XCGLogger.default.debug("======= REQUEST END =======" + "\n")
+        XCGLogger.default.debug("======= asdasdsad=======" + "\n")
         
     }
 }
