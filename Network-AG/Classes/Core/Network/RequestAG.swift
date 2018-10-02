@@ -19,3 +19,10 @@ public protocol Request {
     
 }
 
+extension Request {
+    
+    func pathURL() -> String {
+        return self.baseURL.absoluteString + self.path
+    }
+}
+

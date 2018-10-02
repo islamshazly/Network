@@ -11,7 +11,9 @@ import Network_AG
 import Alamofire
 
 final class DooboCLient: APIClient {
+
     
+
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15.0

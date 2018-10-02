@@ -8,25 +8,23 @@
 
 import UIKit
 import Network_AG
+import XCGLogger
 
 final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userDecode = UserDecodable()
-        userDecode.getProfileResult()
-        
         DooboCLient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
             
             switch result {
             case .success(let model):
-                print(model.refreshInterval)
+                XCGLogger.default.debug(model)
             case.failure(let error):
-                print(error)
+                XCGLogger.default.debug(error)
             }
         }
-        
+//    DooboCLient.shared.stopRequests()
     }
 }
 
