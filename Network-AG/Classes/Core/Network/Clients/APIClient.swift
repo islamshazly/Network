@@ -17,7 +17,7 @@ public enum APIResult<Value, Error> {
 
 public typealias APIResultHandler<T> = (APIResult<T, Swift.Error>) -> Void
 
-public protocol APIClient: APILogger {
+public protocol APIClient: class {
     
     // MARK: -  Properties
     
@@ -36,7 +36,7 @@ public protocol APIClient: APILogger {
 extension APIClient {
     
     public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
-        logRequest(request)
+        Logger.request(request)
         
         sharedSessionManager.request(request)
             .responseObject { [weak self] (response: DataResponse<T>) in
@@ -46,7 +46,7 @@ extension APIClient {
     }
     
     public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
-        logRequest(request)
+        Logger.request(request)
         
         sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
             guard let self = self else { return }
@@ -67,15 +67,7 @@ extension APIClient {
         sharedSessionManager.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
             dataTasks.forEach { $0.cancel() }
         }
-        logger("======= CANCEL REQUESTS =======")
-    }
-    
-    private func logRequest(_ request: Request) {
-        logger("======= REQUEST START =======")
-        logger("= URL " + request.fullURL)
-        logger("= PARAMTERS " + String(describing: request.parameters))
-        logger("= HEADERS " + String(describing: request.headers))
-        logger("= HTTPMETHOD " + String(describing: request.method))
-        logger("======== REQUEST END =========" + "\n")
+        Logger.debug("======= CANCEL REQUESTS =======")
+        
     }
 }

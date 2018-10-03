@@ -16,7 +16,7 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         callRequest()
-        
+        DooboCLient.shared.cancelRequests()
     }
 
     func callRequest() {

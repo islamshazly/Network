@@ -17,17 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        setupLogger()
-        
         return true
-    }
-
-    func setupLogger() {
-        
-        let log = XCGLogger.default
-        log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
-        log.logAppDetails()
-        
     }
     
 }
