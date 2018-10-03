@@ -52,10 +52,9 @@ extension APIClient {
     public func cancelRequests() {
         
         let sessionManager = Alamofire.SessionManager.default
-        
         sessionManager.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
             dataTasks.forEach { $0.cancel() }
-            
+   
         }
         XCGLogger.default.debug("======= CANCEL REQUESTS =======")
     }

@@ -21,14 +21,9 @@ final class ViewController: UIViewController {
         callRequest()
         callRequest()
         DooboCLient.shared.cancelRequests()
-
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+
     func callRequest() {
         DooboCLient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
             
