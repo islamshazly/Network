@@ -15,6 +15,21 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        callRequest()
+        callRequest()
+        callRequest()
+        callRequest()
+        callRequest()
+        DooboCLient.shared.cancelRequests()
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func callRequest() {
         DooboCLient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
             
             switch result {
@@ -24,7 +39,6 @@ final class ViewController: UIViewController {
                 XCGLogger.default.debug(error)
             }
         }
-//    DooboCLient.shared.stopRequests()
     }
 }
 

@@ -18,7 +18,7 @@ final class DooboCLient: APIClient {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15.0
 
-        let sessionManager: SessionManager = SessionManager(configuration: configuration)
+        let sessionManager: SessionManager = Alamofire.SessionManager(configuration: configuration)
         
         return sessionManager
     }()

@@ -28,7 +28,7 @@ public protocol APIClient: class {
     // MARK: - Public functions
     
     func start<T: Decodable>(request: Request, result: @escaping ResultHandler<T>)
-    func stopRequests()
+    func cancelRequests()
 }
 
 extension APIClient {
@@ -37,22 +37,27 @@ extension APIClient {
         
         logRequest(request)
         sharedSessionManager.request(request)
-                            .responseObject { (response: DataResponse<T>) in
-                                        switch response.result {
-                                        case .success(let model):
-                                            result(.success(model))
-                                            break
-                                        case.failure(let error):
-                                            result(.failure(error))
-                                            break
-                                        }
+            .responseObject { (response: DataResponse<T>) in
+                switch response.result {
+                case .success(let model):
+                    result(.success(model))
+                    break
+                case.failure(let error):
+                    result(.failure(error))
+                    break
+                }
         }
     }
     
-    public func stopRequests() {
+    public func cancelRequests() {
         
-        XCGLogger.default.debug("======= STOP REQUESTS =======")
-        sharedSessionManager.session.invalidateAndCancel()
+        let sessionManager = Alamofire.SessionManager.default
+        
+        sessionManager.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
+            dataTasks.forEach { $0.cancel() }
+            
+        }
+        XCGLogger.default.debug("======= CANCEL REQUESTS =======")
     }
     
     func logRequest(_ request: Request) {

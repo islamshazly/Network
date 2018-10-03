@@ -12,13 +12,13 @@ extension Alamofire.DataRequest {
     
     func responseObject<T: Decodable>(completionHandler: @escaping (DataResponse<T>) -> Void) {
         self.responseJSON { (response: DataResponse<Any>) in
-            self.logResponse(response)
             let dataResponse: DataResponse<T>
             if let error = response.result.error {
                 self.logError(error)
                 dataResponse = DataResponse<T>(request: self.request, response: response.response, data: response.data, result: .failure(error))
             } else {
                 do {
+                    self.logResponse(response)
                     let decoder = JSONDecoder()
                     let responseObject: T = try! decoder.decode(T.self, from: response.data!)
                     dataResponse = DataResponse<T>(request: self.request, response: response.response, data: response.data, result: .success(responseObject))
@@ -38,10 +38,11 @@ extension Alamofire.DataRequest {
         
         let invalidJson = "Not a valid JSON"
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: response.result.value, options: .prettyPrinted)
-            let json =  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
-            XCGLogger.default.debug(json)
-            XCGLogger.default.debug("======= RESPONSE END =======" + "\n")
+            if let jsonData = try JSONSerialization.data(withJSONObject: response.result.value, options: .prettyPrinted) as? Data{
+                let json =  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
+                XCGLogger.default.debug(json)
+                XCGLogger.default.debug("======= RESPONSE END =======" + "\n")
+            }
         } catch {
             XCGLogger.default.debug("======= Error whilte convertirng json =======")
             XCGLogger.default.debug(response)
