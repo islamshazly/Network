@@ -27,7 +27,7 @@ extension Alamofire.DataRequest{
                     dataResponse = DataResponse<T>(request: self.request, response: response.response, data: response.data, result: .failure(error))
                 }
             }
-            
+
             completionHandler(dataResponse)
         }
     }

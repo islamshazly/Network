@@ -64,10 +64,12 @@ extension APIClient {
     }
     
     public func cancelRequests() {
-        sharedSessionManager.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
+        let session = Alamofire.SessionManager.default
+        session.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
             dataTasks.forEach { $0.cancel() }
         }
         Logger.debug("======= CANCEL REQUESTS =======")
         
     }
+    
 }
