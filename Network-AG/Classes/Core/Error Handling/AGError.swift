@@ -11,10 +11,9 @@ import Foundation
 public enum AGError: Error {
     
     case unknown
-    case noInternet
-    case timeOut
-    case server
-    case unauthorized
+    case authorization
+    case noConnection
+    case timeout
     
 }
 

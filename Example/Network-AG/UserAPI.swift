@@ -12,7 +12,6 @@ import Alamofire
 
 enum UserAPI: Network_AG.Request {
     
-    
     case login
     case logout
     case signup
@@ -22,6 +21,7 @@ enum UserAPI: Network_AG.Request {
     }
     
     var path: String {
+        
         switch self {
         case .login:
             return baseURL.absoluteString

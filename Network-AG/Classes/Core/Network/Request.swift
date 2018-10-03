@@ -21,7 +21,7 @@ public protocol Request {
 
 extension Request {
     
-    func pathURL() -> String {
+    var fullURL: String {
         return self.baseURL.absoluteString + self.path
     }
 }

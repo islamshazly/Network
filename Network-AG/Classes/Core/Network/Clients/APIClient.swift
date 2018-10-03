@@ -50,18 +50,19 @@ extension APIClient {
     }
     
     public func stopRequests() {
-        XCGLogger.default.debug("Stop Requests")
+        
+        XCGLogger.default.debug("======= STOP REQUESTS =======")
         sharedSessionManager.session.invalidateAndCancel()
     }
     
     func logRequest(_ request: Request) {
         
         XCGLogger.default.debug("======= REQUEST START =======")
-        XCGLogger.default.debug("= URL " + request.pathURL())
-        XCGLogger.default.debug("= Paramters " + String(describing: request.parameters))
-        XCGLogger.default.debug("= Hedaers " + String(describing: request.headers))
-        XCGLogger.default.debug("= HTTPMethod " + String(describing: request.method))
-        XCGLogger.default.debug("======= asdasdsad=======" + "\n")
+        XCGLogger.default.debug("= URL " + request.fullURL)
+        XCGLogger.default.debug("= PARAMTERS " + String(describing: request.parameters))
+        XCGLogger.default.debug("= HEADERS " + String(describing: request.headers))
+        XCGLogger.default.debug("= HTTPMETHOD " + String(describing: request.method))
+        XCGLogger.default.debug("======= REQUEST End=======" + "\n")
         
     }
 }
