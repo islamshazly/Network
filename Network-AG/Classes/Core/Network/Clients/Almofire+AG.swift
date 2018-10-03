@@ -8,7 +8,7 @@
 import Alamofire
 import XCGLogger
 
-extension Alamofire.DataRequest {
+extension Alamofire.DataRequest : APILogger{
     
     func responseObject<T: Decodable>(completionHandler: @escaping (DataResponse<T>) -> Void) {
         self.responseJSON { [ weak self ] (response: DataResponse<Any>) in
@@ -58,7 +58,7 @@ extension Alamofire.DataRequest {
     }
 }
 
-extension SessionManager {
+extension SessionManager: APILogger {
     
     func request(_ request: Network_AG.Request) -> DataRequest {
         let dataRequest = Alamofire.request(request.path, method: request.method,
