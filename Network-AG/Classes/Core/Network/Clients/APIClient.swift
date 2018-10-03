@@ -15,9 +15,9 @@ public enum APIResult<Value, Error> {
     case failure(Swift.Error)
 }
 
-public typealias ResultHandler<T> = (APIResult<T, Swift.Error>) -> Void
+public typealias APIResultHandler<T> = (APIResult<T, Swift.Error>) -> Void
 
-public protocol APIClient: class {
+public protocol APIClient: APILogger {
     
     // MARK: -  Properties
     
@@ -27,64 +27,55 @@ public protocol APIClient: class {
     
     // MARK: - Public functions
     
-    func start<T: Decodable>(request: Request, result: @escaping ResultHandler<T>)
-    func upload<T: Decodable>(data: Data, request: Request, result: @escaping ResultHandler<T>)
+    func start<T: Decodable>(request: Request, result: @escaping APIResultHandler<T>)
+    func upload<T: Decodable>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
     func cancelRequests()
     
 }
 
 extension APIClient {
     
-    public func start<T>(request: Request, result: @escaping ResultHandler<T>) where T: Decodable {
-        
+    public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
         logRequest(request)
+        
         sharedSessionManager.request(request)
-            .responseObject { (response: DataResponse<T>) in
-                switch response.result {
-                case .success(let model):
-                    result(.success(model))
-                    break
-                case.failure(let error):
-                    result(.failure(error))
-                    break
-                }
+            .responseObject { [weak self] (response: DataResponse<T>) in
+                guard let self = self else { return }
+                self.resultHandler(response: response, result: result)
         }
     }
     
-    public func upload<T>(data: Data, request: Request, result: @escaping ResultHandler<T>) where T: Decodable {
-        
+    public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
         logRequest(request)
-        sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {(response: DataResponse<T>) in
-            switch response.result {
-            case .success(let model):
-                result(.success(model))
-                break
-            case.failure(let error):
-                result(.failure(error))
-                break
-            }
+        
+        sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
+            guard let self = self else { return }
+            self.resultHandler(response: response, result: result)
+        }
+    }
+    
+    private func resultHandler<T: Decodable>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
+        switch response.result {
+        case .success(let model):
+            result(.success(model))
+        case.failure(let error):
+            result(.failure(error))
         }
     }
     
     public func cancelRequests() {
-        
-        XCGLogger.default.debug("======= CANCEL REQUESTS =======")
-        let sessionManager = Alamofire.SessionManager.default
-        sessionManager.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
+        sharedSessionManager.session.getTasksWithCompletionHandler { dataTasks, _ , _  in
             dataTasks.forEach { $0.cancel() }
-   
         }
-        XCGLogger.default.debug("===============================")
+        logger("======= CANCEL REQUESTS =======")
     }
     
-    func logRequest(_ request: Request) {
-        
-        XCGLogger.default.debug("======= REQUEST START =======")
-        XCGLogger.default.debug("= URL " + request.fullURL)
-        XCGLogger.default.debug("= PARAMTERS " + String(describing: request.parameters))
-        XCGLogger.default.debug("= HEADERS " + String(describing: request.headers))
-        XCGLogger.default.debug("= HTTPMETHOD " + String(describing: request.method))
-        XCGLogger.default.debug("======= REQUEST End=======" + "\n")
-        
+    private func logRequest(_ request: Request) {
+        logger("======= REQUEST START =======")
+        logger("= URL " + request.fullURL)
+        logger("= PARAMTERS " + String(describing: request.parameters))
+        logger("= HEADERS " + String(describing: request.headers))
+        logger("= HTTPMETHOD " + String(describing: request.method))
+        logger("======== REQUEST END =========" + "\n")
     }
 }

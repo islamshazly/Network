@@ -16,11 +16,6 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         callRequest()
-        callRequest()
-        callRequest()
-        callRequest()
-        callRequest()
-        DooboCLient.shared.cancelRequests()
         
     }
 
@@ -29,9 +24,9 @@ final class ViewController: UIViewController {
             
             switch result {
             case .success(let model):
-                XCGLogger.default.debug(model)
+                break
             case.failure(let error):
-                XCGLogger.default.debug(error)
+                break
             }
         }
     }

@@ -11,7 +11,8 @@ import XCGLogger
 extension Alamofire.DataRequest {
     
     func responseObject<T: Decodable>(completionHandler: @escaping (DataResponse<T>) -> Void) {
-        self.responseJSON { (response: DataResponse<Any>) in
+        self.responseJSON { [ weak self ] (response: DataResponse<Any>) in
+            guard let self = self else { return }
             let dataResponse: DataResponse<T>
             if let error = response.result.error {
                 self.logError(error)
@@ -32,29 +33,28 @@ extension Alamofire.DataRequest {
         }
     }
     
-    func logResponse(_ response: DataResponse<Any>) {
-        
-        XCGLogger.default.debug("======= RESPONSE =======")
+    private func logResponse(_ response: DataResponse<Any>) {
+        logger("======= RESPONSE =======")
         
         let invalidJson = "Not a valid JSON"
         do {
             if let jsonData = try JSONSerialization.data(withJSONObject: response.result.value, options: .prettyPrinted) as? Data{
                 let json =  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
-                XCGLogger.default.debug(json)
-                XCGLogger.default.debug("======= RESPONSE END =======" + "\n")
+                logger(json)
+                logger("======= RESPONSE END =======" + "\n")
             }
         } catch {
-            XCGLogger.default.debug("======= Error whilte convertirng json =======")
-            XCGLogger.default.debug(response)
-            XCGLogger.default.debug("======= RESPONSE END =======" + "\n")
+            logger("======= Error whilte convertirng json =======")
+            logger(response)
+            logger("======= RESPONSE END =======" + "\n")
         }
         
     }
     
-    func logError(_ error: Error) {
-        XCGLogger.default.debug("======= Error =======")
-        XCGLogger.default.debug(error)
-        XCGLogger.default.debug("======= Error END =======" + "\n")
+    private func logError(_ error: Error) {
+        logger("======= Error =======")
+        logger(error)
+        logger("======= Error END =======" + "\n")
     }
 }
 
@@ -66,7 +66,7 @@ extension SessionManager {
                                             encoding: request.parameterEncoding,
                                             headers: request.headers)
         
-        XCGLogger.default.debug(dataRequest.debugDescription)
+        logger(dataRequest.debugDescription)
         
         return dataRequest
     }
