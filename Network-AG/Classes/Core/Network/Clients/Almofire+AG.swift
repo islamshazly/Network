@@ -46,3 +46,17 @@ extension SessionManager {
         return dataRequest
     }
 }
+
+extension RequestRetrier {
+    
+    func retryRequest(seesion: SessionManager, request: Network_AG.Request, retrying error: Error, requestRetryCompletion: @escaping RequestRetryCompletion) {
+        let almofireRequest = Alamofire.request(request.path, method: request.method,
+                                        parameters: request.parameters,
+                                        encoding: request.parameterEncoding,
+                                        headers: request.headers)
+        Alamofire.SessionManager.default.retrier?.should(seesion, retry: almofireRequest, with: error, completion: { (bool, timeInterval) in
+            requestRetryCompletion(bool,timeInterval)
+        })
+        
+    }
+}

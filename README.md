@@ -12,7 +12,10 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Requirements
 Have an access of Areeb Private in house repo 
 ios: 10 
-install ruby cocoa pod 
+install ruby cocoa pod
+## Change Log
+
+
 ## Installation
 
 Network-AG is available through [CocoaPods](https://cocoapods.org). To install
@@ -28,4 +31,4 @@ islamshazly, islam.elshazly@areebgroup.com
 
 ## License
 
-Network-AG is available under the MIT license. See the LICENSE file for more info.
+Network-AG is available under Areeb Group policy .

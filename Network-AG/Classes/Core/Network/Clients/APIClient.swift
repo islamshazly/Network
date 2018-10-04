@@ -38,10 +38,10 @@ extension APIClient {
     public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
         Logger.request(request)
         
-        sharedSessionManager.request(request)
+        sharedSessionManager.request(request).validate()
             .responseObject { [weak self] (response: DataResponse<T>) in
                 guard let self = self else { return }
-                self.resultHandler(response: response, result: result)
+                self.resultHandler(request: request, response: response, result: result)
         }
     }
     
@@ -50,17 +50,26 @@ extension APIClient {
         
         sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
             guard let self = self else { return }
-            self.resultHandler(response: response, result: result)
+            self.resultHandler(request: request, response: response, result: result)
         }
     }
     
-    private func resultHandler<T: Decodable>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
+    private func resultHandler<T: Decodable>(request: Request, response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
         switch response.result {
         case .success(let model):
             result(.success(model))
         case.failure(let error):
+            self.shouldRetry(request, error: error)
             result(.failure(error))
         }
+    }
+    
+    private func shouldRetry(_ request: Request, error: Error) {
+        
+        let cancelError = NSError(domain: "http://www.islam.com", code: 401, userInfo: [:])
+        sharedSessionManager.retrier?.retryRequest(seesion: self.sharedSessionManager, request: request, retrying: cancelError, requestRetryCompletion: { (bool, timeIntervale) in
+            Logger.debug("retry sucess")
+        })
     }
     
     public func cancelRequests() {

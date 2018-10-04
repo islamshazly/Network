@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
 
   s.homepage         = 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'Areeb Group', :file => 'LICENSE' }
   s.author           = { 'islamshazly' => 'islam.elshazly@areebgroup.com' }
   s.source           = { :git => 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network.git', :tag => s.version.to_s }
 
