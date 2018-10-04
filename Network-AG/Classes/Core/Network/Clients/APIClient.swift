@@ -59,15 +59,14 @@ extension APIClient {
         case .success(let model):
             result(.success(model))
         case.failure(let error):
-            self.shouldRetry(request, error: error)
             result(.failure(error))
         }
     }
     
-    private func shouldRetry(_ request: Request, error: Error) {
-        
-        let cancelError = NSError(domain: "http://www.islam.com", code: 401, userInfo: [:])
-        sharedSessionManager.retrier?.retryRequest(seesion: self.sharedSessionManager, request: request, retrying: cancelError, requestRetryCompletion: { (bool, timeIntervale) in
+    private func retry(_ request: Request, error: Error) {
+
+        let cancelError = NSError(domain: "http://www.islam.com", code: 404, userInfo: [:])
+        sharedSessionManager.retrier?.retryRequest(seesion: sharedSessionManager, request: request, retrying: error, requestRetryCompletion: { (bool, timeIntervale) in
             Logger.debug("retry sucess")
         })
     }

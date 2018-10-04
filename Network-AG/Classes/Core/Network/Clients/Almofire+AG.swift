@@ -20,7 +20,7 @@ extension Alamofire.DataRequest{
                 do {
                     Logger.response(response)
                     let decoder = JSONDecoder()
-                    let responseObject: T = try! decoder.decode(T.self, from: response.data!)
+                    let responseObject: T = try decoder.decode(T.self, from: response.data!)
                     dataResponse = DataResponse<T>(request: self.request, response: response.response, data: response.data, result: .success(responseObject))
                 } catch let error  {
                     Logger.error(error)
