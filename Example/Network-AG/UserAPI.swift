@@ -72,14 +72,4 @@ enum UserAPI: Network_AG.Request {
         }
     }
     
-    var silentRetry: Int {
-        
-        switch self {
-        case .login:
-            return 1
-        default:
-            return 1
-        }
-    }
-    
 }

@@ -16,7 +16,6 @@ public protocol Request {
     var parameterEncoding: ParameterEncoding { get }
     var headers: [String : String]? { get }
     var parameters: [String: Any]?  { get }
-    var silentRetry: Int { get }
 }
 
 extension Request {
