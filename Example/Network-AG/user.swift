@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 import Network_AG
 import XCGLogger
 
