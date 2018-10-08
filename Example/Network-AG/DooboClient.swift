@@ -10,23 +10,18 @@ import Foundation
 import Network_AG
 import Alamofire
 
-final class DooboCLient: APIClient {
-
+final class DooboClient: APIClient {
+    
+    static let shared: DooboClient = DooboClient()
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15.0
-
-        let sessionManager: SessionManager = SessionManager(configuration: configuration)
         
-        return sessionManager
+        return SessionManager(configuration: configuration)
     }()
     
     var baseUrl: String = ""
     
     var defaultHeaders: [String : String] = [:]
-    
-    static let shared: DooboCLient = DooboCLient()
-    
     
 }
 

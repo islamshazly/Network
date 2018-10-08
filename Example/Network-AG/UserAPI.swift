@@ -21,7 +21,6 @@ enum UserAPI: Network_AG.Request {
     }
     
     var path: String {
-        
         switch self {
         case .login:
             return baseURL.absoluteString
@@ -33,7 +32,6 @@ enum UserAPI: Network_AG.Request {
     }
     
     var method: HTTPMethod {
-        
         switch self {
         case .login:
             return .get
@@ -45,7 +43,6 @@ enum UserAPI: Network_AG.Request {
     }
     
     var parameterEncoding: ParameterEncoding {
-        
         switch self {
         case .login:
             return URLEncoding.queryString
@@ -61,7 +58,6 @@ enum UserAPI: Network_AG.Request {
     }
     
     var parameters: [String : Any]? {
-        
         switch self {
         case .login:
             return [:]
@@ -71,5 +67,5 @@ enum UserAPI: Network_AG.Request {
             return [:]
         }
     }
-    
+     
 }

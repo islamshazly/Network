@@ -20,7 +20,7 @@ final class ViewController: UIViewController {
     }
 
     func callRequest() {
-        DooboCLient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
+        DooboClient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
             
             switch result {
             case .success(let model):

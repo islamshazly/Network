@@ -6,7 +6,6 @@
 //
 
 import Alamofire
-import XCGLogger
 
 extension Alamofire.DataRequest{
     
