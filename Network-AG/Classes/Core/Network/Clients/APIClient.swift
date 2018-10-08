@@ -67,7 +67,7 @@ extension APIClient {
 
         // fake error code 400 to make alamofire determine to retry
         
-        let cancelError = NSError(domain: "http://www.islam.com", code: 400, userInfo: [:])
+//        let cancelError = NSError(domain: "http://www.islam.com", code: 400, userInfo: [:])
         sharedSessionManager.retrier?.retryRequest(seesion: sharedSessionManager, request: request, retrying: error, requestRetryCompletion: { (bool, timeIntervale) in
             Logger.debug("retry sucess")
         })

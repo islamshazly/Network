@@ -28,11 +28,10 @@ final class Logger {
         
         let invalidJson = "Not a valid JSON"
         do {
-            if let jsonData = try JSONSerialization.data(withJSONObject: response.result.value, options: .prettyPrinted) as? Data{
+            let jsonData = try JSONSerialization.data(withJSONObject: response.result.value, options: .prettyPrinted)
                 let json =  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
                 Logger.Debug.debug(json)
                 Logger.Debug.debug("======= RESPONSE END =======" + "\n")
-            }
         } catch {
             Logger.Debug.debug("======= Error whilte convertirng json =======")
             Logger.Debug.debug(response)
