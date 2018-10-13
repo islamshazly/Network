@@ -15,7 +15,6 @@ final class DooboClient: APIClient {
     static let shared: DooboClient = DooboClient()
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
-        
         return SessionManager(configuration: configuration)
     }()
     

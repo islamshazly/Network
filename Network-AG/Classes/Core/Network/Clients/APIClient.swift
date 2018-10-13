@@ -38,6 +38,7 @@ extension APIClient {
     public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
         Logger.request(request)
         
+        sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
         sharedSessionManager.request(request).validate()
             .responseObject { [weak self] (response: DataResponse<T>) in
                 guard let self = self else { return }
