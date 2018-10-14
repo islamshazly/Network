@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UI+AG'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'UI Extension for Areeb Group'
   s.description      = 'In House UI Extensions for Areeb Group, to reuse them across our iOS apps'
 
