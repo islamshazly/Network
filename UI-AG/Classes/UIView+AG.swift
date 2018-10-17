@@ -13,6 +13,7 @@ extension UIView {
             layer.masksToBounds = newValue > 0
         }
     }
+    
     @IBInspectable var circuler: Bool {
         get {
             return self.circuler
@@ -22,6 +23,7 @@ extension UIView {
             layer.masksToBounds = true
         }
     }
+    
     @IBInspectable var borderWidth: CGFloat {
         get {
             return layer.borderWidth
@@ -30,6 +32,7 @@ extension UIView {
             layer.borderWidth = newValue
         }
     }
+    
     @IBInspectable var borderColor: UIColor? {
         get {
             return self.borderColor
@@ -39,7 +42,6 @@ extension UIView {
         }
     }
 }
-
 
 // MARK: - Properties
 
@@ -70,7 +72,7 @@ extension UIView {
     
     public var width: CGFloat {
         get {
-             return frame.width
+            return frame.width
         } set(value) {
             self.frame.size = CGSize(width: value, height: height)
         }
@@ -117,6 +119,13 @@ extension UIView {
         return self.center.y
     }
     
+    public func loadNibFile(){
+        let bundle = Bundle(for: self.classForCoder)
+        let view = UINib.init(nibName: String(describing: type(of: self)), bundle: bundle).instantiate(withOwner: self, options: nil)[0] as! UIView
+        view.frame = self.bounds
+        self.addSubview(view)
+    }
+    
     public class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
         return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }
@@ -126,6 +135,7 @@ extension UIView {
     }
     
 }
+
 // MARK: - UI Methods
 
 extension UIView {
@@ -182,6 +192,7 @@ extension UIView {
         self.layer.addSublayer(border)
     }
     
+    
     public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
@@ -206,7 +217,7 @@ extension UIView {
 private let CATransform3DM34: CGFloat = 1.0 / -1000.0
 
 extension UIView {
-
+    
     public func setRotationX(_ x: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = CATransform3DM34
@@ -343,5 +354,4 @@ public extension UIView {
         addGestureRecognizer(longPressGesture)
         isUserInteractionEnabled = true
     }
-    
 }
