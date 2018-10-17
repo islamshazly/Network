@@ -36,7 +36,7 @@ public extension UITableView {
         register(UINib(nibName: identifier, bundle: bundle), forCellReuseIdentifier: identifier)
     }
     
-    public func safeScrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
+    public func safeScrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
         guard indexPath.section < numberOfSections else { return }
         guard indexPath.row < numberOfRows(inSection: indexPath.section) else { return }
         scrollToRow(at: indexPath, at: scrollPosition, animated: animated)

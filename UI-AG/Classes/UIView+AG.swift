@@ -126,10 +126,6 @@ extension UIView {
         self.addSubview(view)
     }
     
-    public class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
-        return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
-    }
-    
     public func removeSubviews() {
         subviews.forEach({ $0.removeFromSuperview() })
     }
@@ -286,7 +282,7 @@ public extension UIView {
             delay: 0,
             usingSpringWithDamping: UIViewAnimationSpringDamping,
             initialSpringVelocity: UIViewAnimationSpringVelocity,
-            options: UIViewAnimationOptions.allowAnimatedContent,
+            options: UIView.AnimationOptions.allowAnimatedContent,
             animations: animations,
             completion: completion
         )
@@ -343,7 +339,7 @@ public extension UIView {
         isUserInteractionEnabled = true
     }
     
-    public func addSwipeGesture(direction: UISwipeGestureRecognizerDirection, fingerCount: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
+    public func addSwipeGesture(direction: UISwipeGestureRecognizer.Direction, fingerCount: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
         let tap = SwipeGesture(direction: direction,fingerCount: fingerCount, action: action)
         addGestureRecognizer(tap)
         isUserInteractionEnabled = true

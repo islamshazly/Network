@@ -14,7 +14,7 @@ open class SwipeGesture: UISwipeGestureRecognizer {
             numberOfTouchesRequired = fingerCount
         }
     }
-    public var swipedirection: UISwipeGestureRecognizerDirection = .down {
+    public var swipedirection: UISwipeGestureRecognizer.Direction = .down {
         didSet {
             self.direction = swipedirection
         }
@@ -25,7 +25,7 @@ open class SwipeGesture: UISwipeGestureRecognizer {
     }
     
     public convenience init (
-        direction: UISwipeGestureRecognizerDirection,
+        direction: UISwipeGestureRecognizer.Direction,
         fingerCount: Int = 1,
         action: ((UISwipeGestureRecognizer) -> Void)?) {
         self.init()

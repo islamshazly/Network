@@ -59,7 +59,7 @@ public extension UIImageView {
         })
     }
     
-    public func blur(withStyle style: UIBlurEffectStyle = .light) {
+    public func blur(withStyle style: UIBlurEffect.Style = .light) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = bounds
@@ -68,7 +68,7 @@ public extension UIImageView {
         clipsToBounds = true
     }
     
-    public func blurred(withStyle style: UIBlurEffectStyle = .light) -> UIImageView {
+    public func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView {
         let imgView = self
         imgView.blur(withStyle: style)
         return imgView

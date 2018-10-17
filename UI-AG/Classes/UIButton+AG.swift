@@ -12,7 +12,7 @@ import UIKit
 
 public extension UIButton {
     
-    private var states: [UIControlState] {
+    private var states: [UIControl.State] {
         return [.normal, .selected, .highlighted, .disabled]
     }
     
@@ -41,7 +41,7 @@ public extension UIButton {
         }
     }
     
-    public func image(to color: UIColor, for: UIControlState) {
+    public func image(to color: UIColor, for: UIControl.State) {
         if let imageForState = self.image(for: state) {
             self.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
             let colorizedImage = imageForState.image(withTintColor: color)

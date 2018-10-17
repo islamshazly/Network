@@ -10,7 +10,7 @@ import ImageIO
 public extension UIImage {
     
     public var bytesSize: Int {
-        return UIImageJPEGRepresentation(self, 1)?.count ?? 0
+        return self.jpegData(compressionQuality: 1)?.count ?? 0
     }
     public var kilobytesSize: Int {
         return bytesSize / 1024
@@ -33,7 +33,7 @@ public extension UIImage {
     }
     
     public func compressedData(quality: CGFloat = 0.5) -> Data? {
-        return UIImageJPEGRepresentation(self, quality)
+        return self.jpegData(compressionQuality: quality)
     }
     
     public func cropped(to rect: CGRect) -> UIImage {
@@ -119,11 +119,11 @@ public extension UIImage {
     }
     
     public func changeImageColorTint(_ color : UIColor) {
-        self.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        self.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
     }
     
     public func encodeImage () -> String {
-        let strBase64 = UIImagePNGRepresentation(self)!.base64EncodedString()
+        let strBase64 = self.pngData()!.base64EncodedString()
         
         return strBase64
     }
@@ -138,7 +138,7 @@ public extension UIImage {
     }
     
     public func imageToDate() -> Data?{
-        let data = UIImagePNGRepresentation(self)
+        let data = self.pngData()
         return data ?? nil
     }
     
