@@ -1,5 +1,48 @@
 import UIKit
 
+// MARK: - IBInspectable
+
+extension UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+    
+    @IBInspectable var circuler: Bool {
+        get {
+            return self.circuler
+        }
+        set {
+            layer.cornerRadius = layer.cornerRadius / 2
+            layer.masksToBounds = true
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            return self.borderColor
+        }
+        set {
+            layer.borderColor = newValue?.cgColor
+        }
+    }
+}
+
 // MARK: - Properties
 
 extension UIView {
@@ -92,6 +135,7 @@ extension UIView {
     }
     
 }
+
 // MARK: - UI Methods
 
 extension UIView {
@@ -148,7 +192,8 @@ extension UIView {
         self.layer.addSublayer(border)
     }
     
-    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+    
+    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath

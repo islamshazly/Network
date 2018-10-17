@@ -14,7 +14,7 @@ public extension UITextField {
             return self.placeHolderColor
         }
     }
-    @IBInspectable var borderColor: CGColor {
+    @IBInspectable var border: CGColor {
         set {
             layer.borderColor = newValue
         } get {

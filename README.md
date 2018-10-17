@@ -2,7 +2,7 @@
 UIKit Extensions for Areeb Group
 ## Requirements
 ios.deployment_target = '10.0'
-Have access on In hose Areeb Group posspec repo. 
+Have access on In house Areeb Group posspec repo. 
 
 ## Installation
 
