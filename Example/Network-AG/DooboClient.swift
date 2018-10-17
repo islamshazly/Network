@@ -15,6 +15,7 @@ final class DooboClient: APIClient {
     static let shared: DooboClient = DooboClient()
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .returnCacheDataDontLoad
         return SessionManager(configuration: configuration)
     }()
     

@@ -69,6 +69,6 @@ enum UserAPI: Network_AG.Request {
     }
     
     var cachPolicy: NSURLRequest.CachePolicy {
-        return .reloadIgnoringLocalCacheData
+        return .returnCacheDataElseLoad
     }
 }

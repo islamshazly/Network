@@ -39,7 +39,6 @@ extension SessionManager {
                                             parameters: request.parameters,
                                             encoding: request.parameterEncoding,
                                             headers: request.headers)
-        
         Logger.debug(dataRequest.debugDescription)
         
         return dataRequest
