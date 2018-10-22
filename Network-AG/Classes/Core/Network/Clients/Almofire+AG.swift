@@ -35,7 +35,7 @@ extension Alamofire.DataRequest{
 extension SessionManager {
     
     func request(_ request: Network_AG.Request) -> DataRequest {
-        let dataRequest = Alamofire.request(request.path, method: request.method,
+        let dataRequest = Alamofire.request(request.fullURL, method: request.method,
                                             parameters: request.parameters,
                                             encoding: request.parameterEncoding,
                                             headers: request.headers)
@@ -48,7 +48,7 @@ extension SessionManager {
 extension RequestRetrier {
     
     func retryRequest(seesion: SessionManager, request: Network_AG.Request, retrying error: Error, requestRetryCompletion: @escaping RequestRetryCompletion) {
-        let almofireRequest = Alamofire.request(request.path, method: request.method,
+        let almofireRequest = Alamofire.request(request.fullURL, method: request.method,
                                         parameters: request.parameters,
                                         encoding: request.parameterEncoding,
                                         headers: request.headers)
