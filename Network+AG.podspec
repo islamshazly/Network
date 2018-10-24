@@ -21,6 +21,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Network-AG/Classes/**/*'
   
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire', '~> 4.7'
+  s.dependency 'Alamofire', '~> 4.7.3'
   s.dependency 'XCGLogger', '~> 6.1.0'
 end
