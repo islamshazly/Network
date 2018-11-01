@@ -28,26 +28,14 @@ public protocol APIClient: class {
     var sharedSessionManager: SessionManager { get set }
     
     // MARK: - Public functions
-    
-    func start<T: Decodable>(request: Request, result: @escaping APIResultHandler<T>)
+
     func start<T: Mappable>(request: Request, result: @escaping APIResultHandler<T>)
-    func upload<T: Decodable>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
+    func upload<T: Mappable>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
     func cancelRequests()
     
 }
 
 extension APIClient {
-    
-    public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
-        Logger.request(request)
-        
-        sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
-        sharedSessionManager.request(request).validate()
-            .responseObject { [weak self] (response: DataResponse<T>) in
-                guard let self = self else { return }
-                self.resultHandler(request: request, response: response, result: result)
-        }
-    }
     
     public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Mappable {
         Logger.request(request)
@@ -59,7 +47,7 @@ extension APIClient {
         }
     }
     
-    public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
+    public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Mappable {
         Logger.request(request)
         
         sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
@@ -68,11 +56,13 @@ extension APIClient {
         }
     }
     
-    private func resultHandler<T>(request: Request, response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
+    private func resultHandler<T: Mappable>(request: Request, response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
         switch response.result {
         case .success(let model):
+            Logger.response(model.toJSONString() ?? "")
             result(.success(model))
         case.failure(let error):
+            Logger.error(error)
             result(.failure(error))
         }
     }

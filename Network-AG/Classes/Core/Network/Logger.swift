@@ -7,6 +7,7 @@
 
 import XCGLogger
 import Alamofire
+import ObjectMapper
 
 final class Logger {
     
@@ -38,6 +39,13 @@ final class Logger {
             Logger.Debug.debug("======= RESPONSE END =======" + "\n")
         }
         
+    }
+    
+    static func response(_ json: String) {
+        Logger.Debug.debug("======= RESPONSE =======")
+        Logger.Debug.debug(json)
+        Logger.Debug.debug("======= RESPONSE END =======" + "\n")
+
     }
     
     static func error(_ error: Error) {

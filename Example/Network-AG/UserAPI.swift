@@ -23,7 +23,7 @@ enum UserAPI: Network_AG.Request {
     var path: String {
         switch self {
         case .login:
-            return "sdsdsd"
+            return ""
         case.logout:
             return ""
         case.signup:
