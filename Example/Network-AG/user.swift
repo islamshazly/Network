@@ -9,6 +9,7 @@
 import Foundation
 import Network_AG
 import XCGLogger
+import  ObjectMapper
 
 class UserDecodable: Decodable {
     
@@ -40,4 +41,17 @@ class UserDecodable: Decodable {
         
     }
     
+}
+
+class userMappable: Mappable {
+    
+    
+    var refreshInterval: Double?
+    
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        refreshInterval <- map["RefreshInterval"]
+    }
 }

@@ -23,11 +23,11 @@ enum UserAPI: Network_AG.Request {
     var path: String {
         switch self {
         case .login:
-            return baseURL.absoluteString
+            return "sdsdsd"
         case.logout:
-            return baseURL.absoluteString
+            return ""
         case.signup:
-            return baseURL.absoluteString
+            return ""
         }
     }
     

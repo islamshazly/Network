@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 import XCGLogger
+import ObjectMapper
+import AlamofireObjectMapper
 
 public enum APIResult<Value, Error> {
     case success(Value)
@@ -28,6 +30,7 @@ public protocol APIClient: class {
     // MARK: - Public functions
     
     func start<T: Decodable>(request: Request, result: @escaping APIResultHandler<T>)
+    func start<T: Mappable>(request: Request, result: @escaping APIResultHandler<T>)
     func upload<T: Decodable>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
     func cancelRequests()
     
@@ -46,6 +49,16 @@ extension APIClient {
         }
     }
     
+    public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Mappable {
+        Logger.request(request)
+        
+        sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
+        sharedSessionManager.request(request).responseObject { [weak self] (response: DataResponse<T>) in
+            guard let self = self else { return }
+            self.resultHandler(request: request, response: response, result: result)
+        }
+    }
+    
     public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Decodable {
         Logger.request(request)
         
@@ -55,7 +68,7 @@ extension APIClient {
         }
     }
     
-    private func resultHandler<T: Decodable>(request: Request, response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
+    private func resultHandler<T>(request: Request, response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
         switch response.result {
         case .success(let model):
             result(.success(model))

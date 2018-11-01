@@ -20,10 +20,11 @@ final class ViewController: UIViewController {
     }
 
     func callRequest() {
-        DooboClient.shared.start(request: UserAPI.login) { (result: APIResult<UserDecodable, Error>) in
+        DooboClient.shared.start(request: UserAPI.login) { (result: APIResult<userMappable, Error>) in
             
             switch result {
             case .success(let model):
+                print(model.refreshInterval)
                 break
             case.failure(let error):
                 break
