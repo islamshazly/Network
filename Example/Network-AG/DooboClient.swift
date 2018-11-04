@@ -12,9 +12,10 @@ import Alamofire
 import ObjectMapper
 
 final class DooboClient: APIClient {
-    
+    var validStatusCodes: ClosedRange<Int> {
+        return 200...300
+    }
     static let shared: DooboClient = DooboClient()
-    
     var lastRequest: Network_AG.Request?
     var result: ((APIResult<Mappable, Error>) -> ())?
     var sharedSessionManager: SessionManager = {
@@ -25,9 +26,6 @@ final class DooboClient: APIClient {
     
     var baseUrl: String = ""
     var defaultHeaders: [String : String] = [:]
-    var validStatusCodes: CountableClosedRange<Int> {
-        return 200...300
-    }
     
 }
 

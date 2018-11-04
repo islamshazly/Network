@@ -29,7 +29,6 @@ final class ViewController: UIViewController {
             
             switch result {
             case .success(let model):
-                print(model.refreshInterval)
                 break
             case.failure(let error):
                 break

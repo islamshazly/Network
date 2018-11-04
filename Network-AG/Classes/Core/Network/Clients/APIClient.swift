@@ -44,7 +44,8 @@ extension APIClient {
         Logger.request(request)
         self.lastRequest = request
         sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
-        sharedSessionManager.request(request).validate(statusCode: validStatusCodes).responseObject { [weak self] (response: DataResponse<T>) in
+        sharedSessionManager.request(request).validate(statusCode: self.validStatusCodes)
+            .responseObject { [weak self] (response: DataResponse<T>) in
             guard let self = self else { return }
             self.resultHandler(response: response, result: result)
         }
