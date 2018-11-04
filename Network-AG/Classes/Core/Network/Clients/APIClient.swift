@@ -26,24 +26,26 @@ public protocol APIClient: class {
     var baseUrl: String { get }
     var defaultHeaders: [String: String] { get }
     var sharedSessionManager: SessionManager { get set }
+    var lastRequest: Request? { get set }
+    var result: APIResultHandler<Mappable>? { get set}
     
     // MARK: - Public functions
 
     func start<T: Mappable>(request: Request, result: @escaping APIResultHandler<T>)
     func upload<T: Mappable>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
     func cancelRequests()
-    
 }
 
 extension APIClient {
     
+    
     public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Mappable {
         Logger.request(request)
-        
+        self.lastRequest = request
         sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
         sharedSessionManager.request(request).responseObject { [weak self] (response: DataResponse<T>) in
             guard let self = self else { return }
-            self.resultHandler(request: request, response: response, result: result)
+            self.resultHandler(response: response, result: result)
         }
     }
     
@@ -52,11 +54,11 @@ extension APIClient {
         
         sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
             guard let self = self else { return }
-            self.resultHandler(request: request, response: response, result: result)
+            self.resultHandler(response: response, result: result)
         }
     }
     
-    private func resultHandler<T: Mappable>(request: Request, response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
+    private func resultHandler<T: Mappable>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
         switch response.result {
         case .success(let model):
             Logger.response(model.toJSONString() ?? "")
@@ -83,7 +85,6 @@ extension APIClient {
             dataTasks.forEach { $0.cancel() }
         }
         Logger.debug("======= CANCEL REQUESTS =======")
-        
     }
     
 }

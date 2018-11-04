@@ -18,6 +18,11 @@ final class ViewController: UIViewController {
         callRequest()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
 
     func callRequest() {
         DooboClient.shared.start(request: UserAPI.login) { (result: APIResult<userMappable, Error>) in

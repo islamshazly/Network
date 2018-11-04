@@ -9,10 +9,14 @@
 import Foundation
 import Network_AG
 import Alamofire
+import ObjectMapper
 
 final class DooboClient: APIClient {
     
     static let shared: DooboClient = DooboClient()
+    
+    var lastRequest: Network_AG.Request?
+    var result: ((APIResult<Mappable, Error>) -> ())?
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.requestCachePolicy = .returnCacheDataDontLoad
@@ -20,7 +24,6 @@ final class DooboClient: APIClient {
     }()
     
     var baseUrl: String = ""
-    
     var defaultHeaders: [String : String] = [:]
     
 }

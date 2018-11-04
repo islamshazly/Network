@@ -25,7 +25,7 @@ enum UserAPI: Network_AG.Request {
         case .login:
             return ""
         case.logout:
-            return ""
+            return "dsfsdfsdf"
         case.signup:
             return ""
         }
