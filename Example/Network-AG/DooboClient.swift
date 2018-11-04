@@ -25,6 +25,9 @@ final class DooboClient: APIClient {
     
     var baseUrl: String = ""
     var defaultHeaders: [String : String] = [:]
+    var validStatusCodes: CountableClosedRange<Int> {
+        return 200...300
+    }
     
 }
 

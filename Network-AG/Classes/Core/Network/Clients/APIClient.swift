@@ -28,7 +28,8 @@ public protocol APIClient: class {
     var sharedSessionManager: SessionManager { get set }
     var lastRequest: Request? { get set }
     var result: APIResultHandler<Mappable>? { get set}
-    
+    var validStatusCodes: CountableClosedRange<Int> { get }
+
     // MARK: - Public functions
 
     func start<T: Mappable>(request: Request, result: @escaping APIResultHandler<T>)
@@ -43,7 +44,7 @@ extension APIClient {
         Logger.request(request)
         self.lastRequest = request
         sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
-        sharedSessionManager.request(request).responseObject { [weak self] (response: DataResponse<T>) in
+        sharedSessionManager.request(request).validate(statusCode: validStatusCodes).responseObject { [weak self] (response: DataResponse<T>) in
             guard let self = self else { return }
             self.resultHandler(response: response, result: result)
         }
