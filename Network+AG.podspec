@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+AG'
-  s.version          = '0.1.7'
+  s.version          = '0.1.8'
   s.summary          = 'Netowrk layer for Areeb Group'
   s.homepage         = 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network'
   s.license          = { :type => 'Areeb Group', :file => 'LICENSE' }
