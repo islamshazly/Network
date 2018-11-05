@@ -65,7 +65,12 @@ extension APIClient {
         case.failure(let error):
             if let decodedPayload = String(data: response.data!, encoding: .utf8) {
                 let errorPayload = ErrorPayload(JSONString: decodedPayload)
-                result(.failure(errorPayload as! ErrorPayload))
+                if let payload = errorPayload{
+                    result(.failure(payload))
+                }
+                else{
+                    result(.failure(error as! ErrorPayload))
+                }
             } else {
                 result(.failure(error as! ErrorPayload))
             }
