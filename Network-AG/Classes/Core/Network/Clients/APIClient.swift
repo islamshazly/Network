@@ -14,10 +14,10 @@ import AlamofireObjectMapper
 
 public enum APIResult<Value, Error> {
     case success(Value)
-    case failure(Swift.Error)
+    case failure((ErrorPayload))
 }
 
-public typealias APIResultHandler<T> = (APIResult<T, Swift.Error>) -> Void
+public typealias APIResultHandler<T> = (APIResult<T, ErrorPayload>) -> Void
 
 public protocol APIClient: class {
     
@@ -27,55 +27,56 @@ public protocol APIClient: class {
     var defaultHeaders: [String: String] { get }
     var sharedSessionManager: SessionManager { get set }
     var lastRequest: Request? { get set }
-    var result: APIResultHandler<Mappable>? { get set}
     var validStatusCodes: CountableClosedRange<Int> { get }
-
+    
     // MARK: - Public functions
-
-    func start<T: Mappable>(request: Request, result: @escaping APIResultHandler<T>)
-    func upload<T: Mappable>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
+    
+    func start<T: Model>(request: Request, result: @escaping APIResultHandler<T>)
+    func upload<T: Model>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
     func cancelRequests()
 }
 
 extension APIClient {
     
-    
-    public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Mappable {
+    public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Model {
         Logger.request(request)
         self.lastRequest = request
         sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
         sharedSessionManager.request(request).validate(statusCode: self.validStatusCodes)
             .responseObject { [weak self] (response: DataResponse<T>) in
-            guard let self = self else { return }
-            self.resultHandler(response: response, result: result)
+                guard let self = self else { return }
+                self.resultHandler(response: response, result: result)
         }
     }
     
-    public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Mappable {
+    public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Model {
         Logger.request(request)
-        
         sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
             guard let self = self else { return }
             self.resultHandler(response: response, result: result)
         }
     }
     
-    private func resultHandler<T: Mappable>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
+    private func resultHandler<T: Model>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
         switch response.result {
         case .success(let model):
-            Logger.response(model.toJSONString() ?? "")
+            Logger.response(model.toJSONString() ?? "Json is empty")
             result(.success(model))
         case.failure(let error):
-            Logger.error(error)
-            result(.failure(error))
+            if let decodedPayload = String(data: response.data!, encoding: .utf8) {
+                let errorPayload = ErrorPayload(JSONString: decodedPayload)
+                result(.failure(errorPayload as! ErrorPayload))
+            } else {
+                result(.failure(error as! ErrorPayload))
+            }
         }
     }
     
     private func retry(_ request: Request, error: Error) {
-
+        
         // fake error code 400 to make alamofire determine to retry
         
-//        let cancelError = NSError(domain: "http://www.islam.com", code: 400, userInfo: [:])
+        //        let cancelError = NSError(domain: "http://www.islam.com", code: 400, userInfo: [:])
         sharedSessionManager.retrier?.retryRequest(seesion: sharedSessionManager, request: request, retrying: error, requestRetryCompletion: { (bool, timeIntervale) in
             Logger.debug("retry sucess")
         })

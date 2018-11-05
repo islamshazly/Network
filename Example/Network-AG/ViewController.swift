@@ -25,12 +25,13 @@ final class ViewController: UIViewController {
     }
 
     func callRequest() {
-        DooboClient.shared.start(request: UserAPI.logout) { (result: APIResult<userMappable, Error>) in
+        DooboClient.shared.start(request: UserAPI.logout) { (result: APIResult<userMappable, ErrorPayload>) in
             
             switch result {
             case .success(let model):
                 break
             case.failure(let error):
+                    
                 break
             }
         }

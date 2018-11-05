@@ -17,7 +17,7 @@ enum UserAPI: Network_AG.Request {
     case signup
     
     var baseURL: URL {
-        return URL(string: "http://api.emiratesauction.com/v2/carsonline")!
+        return URL(string: "http://test.api.doobo.co/")!
     }
     
     var path: String {
@@ -25,7 +25,7 @@ enum UserAPI: Network_AG.Request {
         case .login:
             return ""
         case.logout:
-            return "dsfsdfsdf"
+            return "api/v1/registration/token/generate"
         case.signup:
             return ""
         }
@@ -36,7 +36,7 @@ enum UserAPI: Network_AG.Request {
         case .login:
             return .get
         case.logout:
-            return .get
+            return .post
         case.signup:
             return .post
         }
@@ -62,7 +62,9 @@ enum UserAPI: Network_AG.Request {
         case .login:
             return [:]
         case.logout:
-            return [:]
+            return ["type" : "sms",
+                    "countryCode" : "20",
+                    "phoneNumber" : "343434343434"]
         case.signup:
             return [:]
         }
