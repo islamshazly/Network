@@ -63,16 +63,16 @@ extension APIClient {
             Logger.response(model.toJSONString() ?? "Json is empty")
             result(.success(model))
         case.failure(let error):
-            if let decodedPayload = String(data: response.data!, encoding: .utf8) {
+            if let decodedPayload = String(data: response.data!, encoding: .utf8) , !decodedPayload.isEmpty{
                 if let errorPayload = ErrorPayload(JSONString: decodedPayload) {
                     Logger.error(errorPayload)
-                    result(.failure(errorPayload as! ErrorPayload))
+                    result(.failure(errorPayload))
                 } else {
-                    let payload = ErrorPayload(error as NSError)
+                    let payload = ErrorPayload(error: error as NSError)
                     result(.failure(payload))
                 }
             } else{
-                let payload = ErrorPayload(error as NSError)
+                let payload = ErrorPayload(error: error as NSError)
                 result(.failure(payload))
             }
         }

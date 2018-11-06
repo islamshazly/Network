@@ -35,7 +35,7 @@ public class ErrorPayload: Model, Error {
         }
     }
     
-    public init(_ error: NSError) {
+    public init(error: NSError) {
         code = error.code
         message = error.localizedDescription
     }
