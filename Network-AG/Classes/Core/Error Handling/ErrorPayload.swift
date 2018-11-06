@@ -35,6 +35,11 @@ public class ErrorPayload: Model, Error {
         }
     }
     
+    public init(_ error: NSError) {
+        code = error.code
+        message = error.localizedDescription
+    }
+    
     // MARK: - Initialization Methods
     
     public required init?(map: Map) {
