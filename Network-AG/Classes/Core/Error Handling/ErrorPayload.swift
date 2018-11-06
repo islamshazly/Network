@@ -10,9 +10,32 @@ import ObjectMapper
 
 public class ErrorPayload: Model, Error {
     
-    public var code: Int = 0
-    public var message: String = ""
+    // MARK: - Properties
     
+    private var code: Int = 0
+    private var message: String = ""
+    
+    public var statusCode: Int {
+        set {
+            code = newValue
+        }
+        
+        get {
+            return code
+        }
+    }
+    
+    public var statusMessage: String {
+        set {
+            message = newValue
+        }
+        
+        get {
+            return message
+        }
+    }
+    
+    // MARK: - Initialization Methods
     
     public required init?(map: Map) {
     }
@@ -20,11 +43,9 @@ public class ErrorPayload: Model, Error {
     public init() {
     }
     
+    //
     public func mapping(map: Map) {
         code <- map["code"]
         message <- map["message"]
     }
-    
-    
-    
 }

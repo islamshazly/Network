@@ -8,13 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+AG'
-  s.version          = '0.1.7'
+  s.version          = '0.1.9'
   s.summary          = 'Netowrk layer for Areeb Group'
   s.homepage         = 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network'
   s.license          = { :type => 'Areeb Group', :file => 'LICENSE' }
   s.author           = { 'islamshazly' => 'islam.elshazly@areebgroup.com' }
   s.source           = { :git => 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network.git', :tag => s.version.to_s }
   s.ios.deployment_target = '10.0'
+  s.swift_version = '4.2'
   s.source_files = 'Network-AG/Classes/**/*'
   s.frameworks = 'Foundation'
   s.dependency 'Alamofire', '~> 4.7.3'

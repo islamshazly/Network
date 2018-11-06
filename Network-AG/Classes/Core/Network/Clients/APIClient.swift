@@ -67,7 +67,7 @@ extension APIClient {
                 let errorPayload = ErrorPayload(JSONString: decodedPayload)
                 Logger.error(errorPayload!)
                 result(.failure(errorPayload as! ErrorPayload))
-            } else {
+            } else{
                 result(.failure(error as! ErrorPayload))
             }
         }

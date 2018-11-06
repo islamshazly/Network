@@ -29,7 +29,7 @@ final class Logger {
         
         let invalidJson = "Not a valid JSON"
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: response.result.value, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: response.result.value ?? [:] , options: .prettyPrinted)
                 let json =  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
                 Logger.Debug.debug(json)
                 Logger.Debug.debug("======= RESPONSE END =======" + "\n")
@@ -56,8 +56,8 @@ final class Logger {
     
     static func error(_ error: ErrorPayload) {
         Logger.Debug.debug("======= Error =======")
-        Logger.Debug.debug(error.code)
-        Logger.Debug.debug(error.message)
+        Logger.Debug.debug(error.statusCode)
+        Logger.Debug.debug(error.statusMessage)
         Logger.Debug.debug("======= Error END =======" + "\n")
     }
     
