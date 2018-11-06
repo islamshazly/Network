@@ -54,6 +54,13 @@ final class Logger {
         Logger.Debug.debug("======= Error END =======" + "\n")
     }
     
+    static func error(_ error: ErrorPayload) {
+        Logger.Debug.debug("======= Error =======")
+        Logger.Debug.debug(error.code)
+        Logger.Debug.debug(error.message)
+        Logger.Debug.debug("======= Error END =======" + "\n")
+    }
+    
     static func request(_ request: Request) {
         Logger.Debug.debug("======= REQUEST START =======")
         Logger.Debug.debug("= URL " + request.fullURL)

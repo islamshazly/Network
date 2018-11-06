@@ -10,7 +10,7 @@ import ObjectMapper
 
 extension Alamofire.DataRequest{
     
-    func responseObject<T: Decodable>(completionHandler: @escaping (DataResponse<T>) -> Void) {
+    func responseObjectDecodable<T: Decodable>(completionHandler: @escaping (DataResponse<T>) -> Void) {
         self.responseJSON {(response: DataResponse<Any>) in
             let dataResponse: DataResponse<T>
             if let error = response.result.error {

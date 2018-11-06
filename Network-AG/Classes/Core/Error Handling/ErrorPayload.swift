@@ -10,8 +10,8 @@ import ObjectMapper
 
 public class ErrorPayload: Model, Error {
     
-    var code: Int = 0
-    var message: String = ""
+    public var code: Int = 0
+    public var message: String = ""
     
     
     public required init?(map: Map) {
