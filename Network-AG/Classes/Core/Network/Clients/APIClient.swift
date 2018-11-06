@@ -68,7 +68,8 @@ extension APIClient {
                     Logger.error(errorPayload)
                     result(.failure(errorPayload as! ErrorPayload))
                 } else {
-                    result(.failure(error as! ErrorPayload))
+                    let payload = ErrorPayload(error as NSError)
+                    result(.failure(payload))
                 }
             } else{
                 let payload = ErrorPayload(error as NSError)
