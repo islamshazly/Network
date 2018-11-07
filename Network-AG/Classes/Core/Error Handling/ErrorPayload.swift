@@ -14,7 +14,7 @@ public class ErrorPayload: Model, Error {
     
     private var code: Int = 0
     private var message: String = ""
-    var businessCode: String = ""
+    public var businessCode: String = ""
     
     public var statusCode: Int {
         set {
