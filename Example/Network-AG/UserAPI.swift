@@ -12,6 +12,15 @@ import Alamofire
 
 enum UserAPI: Network_AG.Request {
     
+    var imageName: String? {
+        return ""
+    }
+    
+    var imageFileName: String? {
+        return ""
+    }
+    
+    
     case login
     case logout
     case signup

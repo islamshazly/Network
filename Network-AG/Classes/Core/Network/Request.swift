@@ -17,6 +17,9 @@ public protocol Request {
     var headers: [String : String]? { get }
     var parameters: [String: Any]?  { get }
     var cachPolicy: NSURLRequest.CachePolicy { get }
+    
+    var imageName: String? { get }
+    var imageFileName: String? { get }
 }
 
 extension Request {

@@ -51,10 +51,30 @@ extension APIClient {
     
     public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Model {
         Logger.request(request)
-        sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
-            guard let self = self else { return }
-            self.resultHandler(response: response, result: result)
+        sharedSessionManager.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(data, withName: request.imageName!, fileName: request.imageFileName!, mimeType: "image/*")
+            for (key, value) in request.parameters! {
+                if let stringValue = value as? String {
+                    multipartFormData.append(stringValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            }
+        }, to:request.fullURL, method: request.method, headers: request.headers)
+        { (responseResult: SessionManager.MultipartFormDataEncodingResult) in
+            switch responseResult {
+            case .success(let upload, _, _):
+                upload.responseObject(completionHandler: { (response: DataResponse<T>) in
+                    self.resultHandler(response: response, result: result)
+                })
+            case .failure(let error):
+                let errorPayload = ErrorPayload(error: error as NSError)
+                result(.failure(errorPayload))
+            }
         }
+        
+//        sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
+//            guard let self = self else { return }
+//            self.resultHandler(response: response, result: result)
+//        }
     }
     
     private func resultHandler<T: Model>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
@@ -63,20 +83,28 @@ extension APIClient {
             Logger.response(model.toJSONString() ?? "Json is empty")
             result(.success(model))
         case.failure(let error):
-            if let decodedPayload = String(data: response.data!, encoding: .utf8) , !decodedPayload.isEmpty{
-                if let errorPayload = ErrorPayload(JSONString: decodedPayload) {
-                    Logger.error(errorPayload)
-                    result(.failure(errorPayload))
-                } else {
-                    let payload = ErrorPayload(error: error as NSError)
-                    result(.failure(payload))
-                }
-            } else{
-                let payload = ErrorPayload(error: error as NSError)
-                result(.failure(payload))
-            }
+            let errorPayload = self.handelErrorPayload(error, response: response)
+            result(.failure(errorPayload))
         }
     }
+    
+    private func handelErrorPayload<T: Model>(_ error: Error, response: DataResponse<T>? ) -> ErrorPayload{
+        if response != nil {
+            if let decodedPayload = String(data: (response?.data)!, encoding: .utf8) {
+                if !decodedPayload.isEmpty {
+                    if let errorPayload = ErrorPayload(JSONString: decodedPayload) {
+                        Logger.error(errorPayload)
+                        return errorPayload
+                    }
+                }
+            }
+        }
+        let errorPayload = ErrorPayload(error: error as NSError)
+        
+        return errorPayload
+    }
+    
+    
     
     private func retry(_ request: Request, error: Error) {
         
