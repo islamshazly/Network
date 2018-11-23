@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Network_AG
+import Network_IS
 import Alamofire
 import ObjectMapper
 
@@ -17,7 +17,7 @@ final class DooboClient: APIClient {
         return 200...300
     }
     static let shared: DooboClient = DooboClient()
-    var lastRequest: Network_AG.Request?
+    var lastRequest: Network_IS.Request?
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.requestCachePolicy = .returnCacheDataDontLoad

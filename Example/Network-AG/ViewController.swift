@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Network_AG
+import Network_IS
 import XCGLogger
 
 final class ViewController: UIViewController {

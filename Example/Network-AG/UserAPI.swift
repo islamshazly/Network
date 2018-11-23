@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Network_AG
+import Network_IS
 import Alamofire
 
-enum UserAPI: Network_AG.Request {
+enum UserAPI: Network_IS.Request {
     
     var imageName: String{
         return "assdf"

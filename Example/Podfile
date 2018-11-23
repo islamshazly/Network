@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Network_Example' do
-  pod 'Network+AG', :path => '../'
+  pod 'Network+IS', :path => '../'
 
   target 'Network_Tests' do
     inherit! :search_paths
