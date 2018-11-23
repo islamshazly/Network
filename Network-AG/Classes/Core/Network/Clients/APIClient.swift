@@ -3,7 +3,7 @@
 //  Doobo Test
 //
 //  Created by Islam Elshazly on 9/18/18.
-//  Copyright © 2018 Areeb Group. All rights reserved.
+//  Copyright © 2018 Islam Elshazly. All rights reserved.
 //
 
 import Foundation
@@ -51,8 +51,10 @@ extension APIClient {
     
     public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Model {
         Logger.request(request)
+        print(request.imageFileName)
+        print(request.imageName)
         sharedSessionManager.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(data, withName: request.imageName!, fileName: request.imageFileName!, mimeType: "image/*")
+            multipartFormData.append(data, withName: request.imageName, fileName: request.imageFileName, mimeType: "image/*")
             for (key, value) in request.parameters! {
                 if let stringValue = value as? String {
                     multipartFormData.append(stringValue.data(using: String.Encoding.utf8)!, withName: key)

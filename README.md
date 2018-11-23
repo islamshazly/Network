@@ -1,4 +1,4 @@
-# Network-AG
+# Network+IS
 
 ## Example
 
@@ -6,28 +6,29 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Description 
 
-Network-AG depends on Alamofire 
+Network+IS depends on Alamofire 
 
-## Requirements
-Have an access of Areeb Private in house repo
+## Example
 
-ios: 10
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-install ruby cocoa pod
-
+## Requirements 
+ios.deployment_target = '10.0',
+install Ruby,
+install cocoa pod  `gem install cocoapods`.
 ## Installation
 
-Network-AG is available through [CocoaPods](https://cocoapods.org). To install
+UIExtensions-IS is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'Network+AG'
+pod 'UIExtensions+IS'
 ```
 
 ## Author
 
-Areeb iOS Team
+islamshazly, islam.elshazly92@gmail.com,https://twitter.com/elshazly92
 
 ## License
 
-Network-AG is available under Areeb Group policy .
+UIExtensions-IS is available under the MIT license. See the LICENSE file for more info.

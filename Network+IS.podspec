@@ -7,13 +7,14 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Network+AG'
-  s.version          = '0.2.5'
-  s.summary          = 'Netowrk layer for Areeb Group'
-  s.homepage         = 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network'
-  s.license          = { :type => 'Areeb Group', :file => 'LICENSE' }
-  s.author           = { 'islamshazly' => 'islam.elshazly@areebgroup.com' }
-  s.source           = { :git => 'https://gitlab.com/areeb-egypt-team-2/inhouse/ios_network.git', :tag => s.version.to_s }
+  s.name             = 'Network+IS'
+  s.version          = '1.0.0'
+  s.summary          = 'Netowrk layer'
+  s.homepage         = 'https://github.com/islamshazly/Network'
+  s.license          = { :type => 'Islam Elshazly', :file => 'LICENSE' }
+  s.author           = { 'islamshazly' => 'ishazly92.com' }
+  s.source           = { :git => 'https://github.com/islamshazly/Network.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/elshazly92'
   s.ios.deployment_target = '10.0'
   s.swift_version = '4.2'
   s.source_files = 'Network-AG/Classes/**/*'

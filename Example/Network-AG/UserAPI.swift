@@ -12,12 +12,12 @@ import Alamofire
 
 enum UserAPI: Network_AG.Request {
     
-    var imageName: String? {
-        return ""
+    var imageName: String{
+        return "assdf"
     }
     
-    var imageFileName: String? {
-        return ""
+    var imageFileName: String {
+        return "sdfsdf"
     }
     
     
