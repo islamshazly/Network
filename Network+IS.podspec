@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+IS'
-  s.version          = '3.1.0'
+  s.version          = '3.1.1'
   s.summary          = 'Netowrk layer'
   s.homepage         = 'https://github.com/islamshazly/Network'
   s.license          = { :type => 'Islam Elshazly', :file => 'LICENSE' }
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/elshazly92'
   s.ios.deployment_target = '10.0'
   s.swift_version = '4.2'
-  s.source_files = 'Network-AG/Classes/**/*'
+  s.source_files = 'Network-AG/Classes/**/*.{swift}'
   s.frameworks = 'Foundation'
   s.dependency 'Alamofire', '~> 4.7.3'
   s.dependency 'XCGLogger', '~> 6.1.0'

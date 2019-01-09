@@ -7,6 +7,7 @@
 
 import Alamofire
 import ObjectMapper
+import Network_IS
 
 extension Alamofire.DataRequest{
     
@@ -32,10 +33,11 @@ extension Alamofire.DataRequest{
     }
 }
 
+
 extension SessionManager {
     
     func request(_ request: Network_IS.Request) -> DataRequest {
-        let dataRequest = Alamofire.request(request.fullURL, method: request.method,
+        let dataRequest = Alamofire.request(request.fullURL!, method: request.method,
                                             parameters: request.parameters,
                                             encoding: request.parameterEncoding,
                                             headers: request.headers)
@@ -48,10 +50,10 @@ extension SessionManager {
 extension RequestRetrier {
     
     func retryRequest(seesion: SessionManager, request: Network_IS.Request, retrying error: Error, requestRetryCompletion: @escaping RequestRetryCompletion) {
-        let almofireRequest = Alamofire.request(request.fullURL, method: request.method,
-                                        parameters: request.parameters,
-                                        encoding: request.parameterEncoding,
-                                        headers: request.headers)
+        let almofireRequest = Alamofire.request(request.fullURL!, method: request.method,
+                                                parameters: request.parameters,
+                                                encoding: request.parameterEncoding,
+                                                headers: request.headers)
         Alamofire.SessionManager.default.retrier?.should(seesion, retry: almofireRequest, with: error, completion: { (bool, timeInterval) in
             requestRetryCompletion(bool,timeInterval)
         })

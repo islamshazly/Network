@@ -6,11 +6,14 @@
 //  Copyright © 2018 Islam Elshazly. All rights reserved.
 //
 
+
 import Alamofire
 
 public protocol Request {
     
-    var baseURL: URL { get }
+    // MARK: - Properties
+    
+    var baseURL: URL? { get }
     var path: String { get }
     var method: Alamofire.HTTPMethod { get }
     var parameterEncoding: ParameterEncoding { get }
@@ -21,16 +24,12 @@ public protocol Request {
 
 extension Request {
     
-    var fullURL: String {
-        return self.baseURL.absoluteString + self.path
-    }
+    // MARK: - Properties
     
-    var imageName: String{
-        return ""
-    }
-    
-    var imageFileName: String {
-        return ""
+    var fullURL: String? {
+        guard baseURL != nil else { return nil }
+        
+        return self.baseURL!.absoluteString + self.path
     }
 }
 

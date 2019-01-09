@@ -11,6 +11,10 @@ import Network_IS
 import Alamofire
 
 enum UserAPI: Network_IS.Request {
+    var baseURL: URL?  {
+        return nil
+    }
+    
     
     var imageName: String{
         return "assdf"
@@ -24,10 +28,6 @@ enum UserAPI: Network_IS.Request {
     case login
     case logout
     case signup
-    
-    var baseURL: URL {
-        return URL(string: "http://test.api.doobo.co/")!
-    }
     
     var path: String {
         switch self {

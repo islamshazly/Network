@@ -35,17 +35,6 @@ final class ViewController: UIViewController {
                 break
             }
         }
-        
-        DooboClient.shared.upload(data: Data(), request: UserAPI.logout) { (result: APIResult<userMappable, ErrorPayload>) in
-            
-            switch result {
-            case .success(let model):
-                break
-            case.failure(let error):
-                
-                break
-            }
-        }
     }
 }
 

@@ -32,35 +32,43 @@ public protocol APIClient: class {
     // MARK: - Public functions
     
     func start<T: Model>(request: Request, result: @escaping APIResultHandler<T>)
-    func upload<T: Model>(data: Data, request: Request, result: @escaping APIResultHandler<T>)
+    func upload<T: Model>(data: Data, request: ImageRequest, result: @escaping APIResultHandler<T>)
     func cancelRequests()
 }
 
 extension APIClient {
     
     public func start<T>(request: Request, result: @escaping APIResultHandler<T>) where T: Model {
+        
         Logger.request(request)
+        Logger.debug(fullURL(fromRequest: request))
+        Logger.debug(headers(fromRequest: request))
         self.lastRequest = request
         sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
-        sharedSessionManager.request(request).validate(statusCode: self.validStatusCodes)
+        sharedSessionManager.request(self.fullURL(fromRequest: request), method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request)).validate(statusCode: self.validStatusCodes)
             .responseObject { [weak self] (response: DataResponse<T>) in
                 guard let self = self else { return }
                 self.resultHandler(response: response, result: result)
         }
     }
     
-    public func upload<T>(data: Data, request: Request, result: @escaping APIResultHandler<T>) where T: Model {
+    public func upload<T>(data: Data, request: ImageRequest, result: @escaping APIResultHandler<T>) where T: Model {
         Logger.request(request)
-        print(request.imageFileName)
-        print(request.imageName)
+        Logger.debug(fullURL(fromRequest: request))
+        Logger.debug(headers(fromRequest: request))
+        
+        guard let imageName = request.imageName, let imageFileName = request.imageFileName else {
+            return
+        }
+        
         sharedSessionManager.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(data, withName: request.imageName, fileName: request.imageFileName, mimeType: "image/*")
+            multipartFormData.append(data, withName: imageName, fileName: imageFileName, mimeType: "image/*")
             for (key, value) in request.parameters! {
                 if let stringValue = value as? String {
                     multipartFormData.append(stringValue.data(using: String.Encoding.utf8)!, withName: key)
                 }
             }
-        }, to:request.fullURL, method: request.method, headers: request.headers)
+        }, to:fullURL(fromRequest: request), method: request.method, headers: headers(fromRequest: request))
         { (responseResult: SessionManager.MultipartFormDataEncodingResult) in
             switch responseResult {
             case .success(let upload, _, _):
@@ -72,11 +80,6 @@ extension APIClient {
                 result(.failure(errorPayload))
             }
         }
-        
-//        sharedSessionManager.upload(data, to: request.fullURL, method: request.method, headers: request.headers).responseObject {[weak self ] (response: DataResponse<T>) in
-//            guard let self = self else { return }
-//            self.resultHandler(response: response, result: result)
-//        }
     }
     
     private func resultHandler<T: Model>(response: DataResponse<T>, result: @escaping APIResultHandler<T>) {
@@ -90,7 +93,7 @@ extension APIClient {
         }
     }
     
-    private func handelErrorPayload<T: Model>(_ error: Error, response: DataResponse<T>? ) -> ErrorPayload{
+    private func handelErrorPayload<T: Model>(_ error: Error, response: DataResponse<T>? ) -> ErrorPayload {
         if response != nil {
             if let decodedPayload = String(data: (response?.data)!, encoding: .utf8) {
                 if !decodedPayload.isEmpty {
@@ -126,4 +129,28 @@ extension APIClient {
         Logger.debug("======= CANCEL REQUESTS =======")
     }
     
+    // MARK: - Private functions
+    
+    /// Combines default headers with request headers.
+    /// Prefers request headers in case of key duplication.
+    private func headers(fromRequest request: Request) -> [String: String] {
+        guard let requestHeaders = request.headers else {
+            return defaultHeaders
+        }
+        
+        return requestHeaders.merging(defaultHeaders, uniquingKeysWith: { (requestHeaders, _) in requestHeaders })
+    }
+    
+    private func fullURL(fromRequest request: Request) -> URL {
+        
+        if request.baseURL != nil {
+            return URL(string: request.fullURL!)!
+        } else if !baseUrl.isEmpty {
+            
+            let url = baseUrl + request.path
+            return URL(string: url)!
+        } else {
+            fatalError("You should provide the base url")
+        }
+    }
 }
