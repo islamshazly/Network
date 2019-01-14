@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+IS'
-  s.version          = '3.1.1'
+  s.version          = '3.1.2'
   s.summary          = 'Netowrk layer'
   s.homepage         = 'https://github.com/islamshazly/Network'
   s.license          = { :type => 'Islam Elshazly', :file => 'LICENSE' }

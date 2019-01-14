@@ -13,8 +13,10 @@ public class ErrorPayload: Model, Error {
     // MARK: - Properties
     
     private var code: Int = 0
+    private var status: Int = 0
     private var message: String = ""
     public var businessCode: String = ""
+    public var messageEn: String = ""
     
     public var statusCode: Int {
         set {
@@ -52,6 +54,8 @@ public class ErrorPayload: Model, Error {
     //
     public func mapping(map: Map) {
         businessCode <- map["code"]
+        messageEn <- map["messageEn"]
+        status <- map["error.status"]
         message <- map["message"]
     }
 }
