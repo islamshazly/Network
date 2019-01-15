@@ -13,10 +13,10 @@ public class ErrorPayload: Model, Error {
     // MARK: - Properties
     
     private var code: Int = 0
-    private var status: Int = 0
     private var message: String = ""
     public var businessCode: String = ""
     public var messageEn: String = ""
+    public var status: Int = 0
     
     public var statusCode: Int {
         set {
