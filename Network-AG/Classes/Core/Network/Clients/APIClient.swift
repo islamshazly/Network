@@ -52,6 +52,19 @@ extension APIClient {
         }
     }
     
+    public func startWithoutResponse<T: Model>(request: Request, result: @escaping APIResultHandler<T>) {
+        
+        Logger.request(request)
+        Logger.debug(fullURL(fromRequest: request))
+        Logger.debug(headers(fromRequest: request))
+        self.lastRequest = request
+        sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
+        sharedSessionManager.request(self.fullURL(fromRequest: request), method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request)).validate(statusCode: self.validStatusCodes).response{ [weak self] (response: DefaultDataResponse) in
+            guard let self = self else { return }
+            self.resultDefaultHandler(response: response, result: result)
+        }
+    }
+    
     public func upload<T>(data: Data, request: ImageRequest, result: @escaping APIResultHandler<T>) where T: Model {
         Logger.request(request)
         Logger.debug(fullURL(fromRequest: request))
@@ -88,14 +101,25 @@ extension APIClient {
             Logger.response(model.toJSONString() ?? "Json is empty")
             result(.success(model))
         case.failure(let error):
-            let errorPayload = self.handelErrorPayload(error, response: response)
+            let errorPayload = self.handelErrorPayload(error, data: response.data)
             result(.failure(errorPayload))
         }
     }
     
-    private func handelErrorPayload<T: Model>(_ error: Error, response: DataResponse<T>? ) -> ErrorPayload {
-        if response != nil {
-            if let decodedPayload = String(data: (response?.data)!, encoding: .utf8) {
+    private func resultDefaultHandler<T: Model>(response: DefaultDataResponse, result: @escaping APIResultHandler<T>) {
+        if let error = response.error {
+            let errorPayload = self.handelErrorPayload(error, data: response.data)
+            result(.failure(errorPayload))
+        } else {
+            let success: T =  Mapper<T>().map(JSON: ["success" : true])!
+            
+            result(.success(success))
+        }
+    }
+    
+    private func handelErrorPayload(_ error: Error, data: Data? ) -> ErrorPayload {
+        if data != nil {
+            if let decodedPayload = String(data: data!, encoding: .utf8) {
                 if !decodedPayload.isEmpty {
                     if let errorPayload = ErrorPayload(JSONString: decodedPayload) {
                         Logger.error(errorPayload)
