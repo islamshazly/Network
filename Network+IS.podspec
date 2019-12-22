@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+IS'
-  s.version          = '3.1.4'
+  s.version          = '6.1.0'
   s.summary          = 'Netowrk layer'
   s.homepage         = 'https://github.com/islamshazly/Network'
   s.license          = { :type => 'Islam Elshazly', :file => 'LICENSE' }
@@ -19,8 +19,10 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.source_files = 'Network-AG/Classes/**/*.{swift}'
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire', '~> 4.7.3'
-  s.dependency 'XCGLogger', '~> 6.1.0'
-  s.dependency 'ObjectMapper', '~> 3.3.0'
-  s.dependency 'AlamofireObjectMapper', '~>5.1.0'
+  s.dependency 'Alamofire' 
+  s.dependency 'XCGLogger'
+  s.dependency 'ObjectMapper'
+  s.dependency 'AlamofireObjectMapper'
+  s.dependency 'RxAlamofire'
+  s.dependency 'RxAlamofire+ObjectMapper'
 end

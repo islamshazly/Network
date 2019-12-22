@@ -9,6 +9,7 @@
 import UIKit
 import Network_IS
 import XCGLogger
+import RxSwift
 
 final class ViewController: UIViewController {
     
@@ -25,7 +26,7 @@ final class ViewController: UIViewController {
     }
 
     func callRequest() {
-        DooboClient.shared.start(request: UserAPI.logout) { (result: APIResult<userMappable, ErrorPayload>) in
+        DooboClient.shared.start(request: UserAPI.login) { (result: APIResult<UserMappable, ErrorPayload>) in
             
             switch result {
             case .success(let model):
@@ -35,6 +36,12 @@ final class ViewController: UIViewController {
                 break
             }
         }
+        
+        let asd: Observable<UserMappable> = DooboClient.shared.start(request: UserAPI.login)
+        
+        _ = asd.do(onNext: { (model) in
+            print(model)
+        })
     }
 }
 

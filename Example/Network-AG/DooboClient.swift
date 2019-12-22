@@ -12,7 +12,7 @@ import Alamofire
 import ObjectMapper
 
 final class DooboClient: APIClient {
-    
+
     var validStatusCodes: ClosedRange<Int> {
         return 200...300
     }
@@ -20,11 +20,10 @@ final class DooboClient: APIClient {
     var lastRequest: Network_IS.Request?
     var sharedSessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.requestCachePolicy = .returnCacheDataDontLoad
         return SessionManager(configuration: configuration)
     }()
     
-    var baseUrl: String = ""
+    var baseUrl: String = "https://staging-api-2.fanni.site/"
     var defaultHeaders: [String : String] = [:]
     
 }

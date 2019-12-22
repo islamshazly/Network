@@ -24,12 +24,12 @@ final public class Logger {
         Debug.debug(any)
     }
     
-    public static func response(_ response: DataResponse<Any>) {
+    public static func response(_ response: Data) {
         Debug.debug("======= RESPONSE =======")
         
         let invalidJson = "Not a valid JSON"
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: response.result.value ?? [:] , options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: response ?? [:] , options: .prettyPrinted)
             let json =  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
             Debug.debug(json)
             Debug.debug("======= RESPONSE END =======" + "\n")

@@ -11,11 +11,15 @@ import Alamofire
 import XCGLogger
 import ObjectMapper
 import AlamofireObjectMapper
+import RxAlamofire
+import RxSwift
+import RxAlamofire_ObjectMapper
 
 public enum APIResult<Value, Error> {
     case success(Value)
     case failure((ErrorPayload))
 }
+
 
 public typealias APIResultHandler<T> = (APIResult<T, ErrorPayload>) -> Void
 
@@ -30,8 +34,8 @@ public protocol APIClient: class {
     var validStatusCodes: CountableClosedRange<Int> { get }
     
     // MARK: - Public functions
-    
     func start<T: Model>(request: Request, result: @escaping APIResultHandler<T>)
+    func start<T: Model>(request: Request) -> Observable<T>
     func upload<T: Model>(data: Data, request: ImageRequest, result: @escaping APIResultHandler<T>)
     func cancelRequests()
 }
@@ -44,7 +48,6 @@ extension APIClient {
         Logger.debug(fullURL(fromRequest: request))
         Logger.debug(headers(fromRequest: request))
         self.lastRequest = request
-        sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
         sharedSessionManager.request(self.fullURL(fromRequest: request), method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request)).validate(statusCode: self.validStatusCodes)
             .responseObject { [weak self] (response: DataResponse<T>) in
                 guard let self = self else { return }
@@ -52,16 +55,12 @@ extension APIClient {
         }
     }
     
-    public func startWithoutResponse<T: Model>(request: Request, result: @escaping APIResultHandler<T>) {
-        
-        Logger.request(request)
-        Logger.debug(fullURL(fromRequest: request))
-        Logger.debug(headers(fromRequest: request))
-        self.lastRequest = request
-        sharedSessionManager.session.configuration.requestCachePolicy = request.cachPolicy
-        sharedSessionManager.request(self.fullURL(fromRequest: request), method: request.method, parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request)).validate(statusCode: self.validStatusCodes).response{ [weak self] (response: DefaultDataResponse) in
-            guard let self = self else { return }
-            self.resultDefaultHandler(response: response, result: result)
+    public func start<T>(request: Request) -> Observable<T> where T: Model {
+        let manager = SessionManager.default
+        return manager.rx.request(request.method, self.fullURL(fromRequest: request), parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request))
+            .responseMappable(as: T.self)
+            .flatMapLatest { (model) -> Observable<T> in
+                return Observable.just(model)
         }
     }
     
@@ -101,25 +100,14 @@ extension APIClient {
             Logger.response(model.toJSONString() ?? "Json is empty")
             result(.success(model))
         case.failure(let error):
-            let errorPayload = self.handelErrorPayload(error, data: response.data)
+            let errorPayload = self.handelErrorPayload(error, response: response)
             result(.failure(errorPayload))
         }
     }
     
-    private func resultDefaultHandler<T: Model>(response: DefaultDataResponse, result: @escaping APIResultHandler<T>) {
-        if let error = response.error {
-            let errorPayload = self.handelErrorPayload(error, data: response.data)
-            result(.failure(errorPayload))
-        } else {
-            let success: T =  Mapper<T>().map(JSON: ["success" : true])!
-            
-            result(.success(success))
-        }
-    }
-    
-    private func handelErrorPayload(_ error: Error, data: Data? ) -> ErrorPayload {
-        if data != nil {
-            if let decodedPayload = String(data: data!, encoding: .utf8) {
+    private func handelErrorPayload<T: Model>(_ error: Error, response: DataResponse<T>? ) -> ErrorPayload {
+        if response != nil {
+            if let decodedPayload = String(data: (response?.data)!, encoding: .utf8) {
                 if !decodedPayload.isEmpty {
                     if let errorPayload = ErrorPayload(JSONString: decodedPayload) {
                         Logger.error(errorPayload)
@@ -135,15 +123,7 @@ extension APIClient {
     
     
     
-    private func retry(_ request: Request, error: Error) {
-        
-        // fake error code 400 to make alamofire determine to retry
-        
-        //        let cancelError = NSError(domain: "http://www.islam.com", code: 400, userInfo: [:])
-        sharedSessionManager.retrier?.retryRequest(seesion: sharedSessionManager, request: request, retrying: error, requestRetryCompletion: { (bool, timeIntervale) in
-            Logger.debug("retry sucess")
-        })
-    }
+    
     
     public func cancelRequests() {
         let session = Alamofire.SessionManager.default

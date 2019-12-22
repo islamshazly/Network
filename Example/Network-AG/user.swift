@@ -43,7 +43,7 @@ class UserDecodable: Decodable {
     
 }
 
-class userMappable: Model {
+class UserMappable: Model {
     
     var refreshInterval: Double?
     
