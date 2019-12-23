@@ -13,9 +13,8 @@ public class ErrorPayload: Model, Error {
     // MARK: - Properties
     
     private var code: Int = 0
-    private var message: String = ""
+    public var message: String = ""
     public var businessCode: String = ""
-    public var messageEn: String = ""
     public var status: Int = 0
     
     public var statusCode: Int {
@@ -41,6 +40,12 @@ public class ErrorPayload: Model, Error {
     public init(error: NSError) {
         code = error.code
         message = error.localizedDescription
+        
+    }
+    
+    public init(message: String) {
+        code = 100
+        self.message = message
     }
     
     // MARK: - Initialization Methods
@@ -54,8 +59,16 @@ public class ErrorPayload: Model, Error {
     //
     public func mapping(map: Map) {
         businessCode <- map["code"]
-        messageEn <- map["messageEn"]
         status <- map["error.status"]
         message <- map["message"]
+    }
+    
+    func generateError(description: String) -> NSError {
+        let userInfo: [String : Any] = [
+            NSLocalizedDescriptionKey: description,
+            NSLocalizedFailureReasonErrorKey: description
+        ]
+        let error = NSError(domain: description, code: 1000, userInfo: userInfo)
+        return error
     }
 }

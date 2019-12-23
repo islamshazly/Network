@@ -56,11 +56,26 @@ extension APIClient {
     }
     
     public func start<T>(request: Request) -> Observable<T> where T: Model {
+        Logger.debug(fullURL(fromRequest: request))
+        Logger.request(request)
         let manager = SessionManager.default
-        return manager.rx.request(request.method, self.fullURL(fromRequest: request), parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request))
+        return manager.rx.request(request.method, self.fullURL(fromRequest: request), parameters: request.parameters, encoding: request.parameterEncoding, headers: self.headers(fromRequest: request)).validate(statusCode: self.validStatusCodes)
             .responseMappable(as: T.self)
             .flatMapLatest { (model) -> Observable<T> in
+                Logger.debug(model.toJSON())
                 return Observable.just(model)
+                    .catchError { error in
+                        Logger.error(error)
+                        guard let payload = ErrorPayload(error: error as NSError) as? ErrorPayload else {
+                            return Observable.error(ErrorPayload(message: error.localizedDescription))
+                        }
+                        return Observable.error(payload)}}
+            .catchError { error in
+                Logger.error(error)
+                guard let payload = ErrorPayload(error: error as NSError) as? ErrorPayload else {
+                    return Observable.error(ErrorPayload(message: error.localizedDescription))
+                }
+                return Observable.error(payload)
         }
     }
     

@@ -63,9 +63,9 @@ final public class Logger {
     
     public static func request(_ request: Request) {
         Debug.debug("======= REQUEST START =======")
-        Debug.debug("= PARAMTERS " + String(describing: request.parameters))
-        Debug.debug("= HEADERS " + String(describing: request.headers))
-        Debug.debug("= HTTPMETHOD " + String(describing: request.method))
+        Debug.debug("= PARAMTERS: " + String(describing: request.parameters))
+        Debug.debug("= HEADERS: " + String(describing: request.headers))
+        Debug.debug("= HTTPMETHOD: " + String(describing: request.method))
         Debug.debug("======== REQUEST END =========" + "\n")
     }
 }

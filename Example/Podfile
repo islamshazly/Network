@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git' # public cocoapods specs repo
-source 'https://github.com/{:islamshazly}/specs.git' # my private specs repo
 use_frameworks!
 
 target 'Network_Example' do
