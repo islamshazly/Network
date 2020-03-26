@@ -173,3 +173,37 @@ extension APIClient {
         }
     }
 }
+
+extension DataRequest {
+    //Overriding several methods from Alamofire Validation
+    
+    @discardableResult
+    public func validate<S: Sequence>(statusCode acceptableStatusCodes: S) -> Self where S.Iterator.Element == Int {
+        return self.validate { [unowned self] _, response, bodyData  in
+            return self.validate(statusCode: acceptableStatusCodes, response: response, bodyData: bodyData)
+        }
+    }
+
+    //Overriding several methods from Alamofire Validataion
+    func validate<S: Sequence>(
+        statusCode acceptableStatusCodes: S,
+        response: HTTPURLResponse, bodyData: Data?)
+        -> ValidationResult
+        where S.Iterator.Element == Int
+    {
+        if acceptableStatusCodes.contains(response.statusCode) {
+            return .success
+        } else {
+            var error: Error = AFError.responseValidationFailed(reason: AFError.ResponseValidationFailureReason.unacceptableStatusCode(code: response.statusCode))
+            if let bodyData = bodyData {
+                if let jsonString = String(data: bodyData, encoding: .utf8) {
+                    if let errorNew = Mapper<ErrorPayload>().map(JSONString: jsonString)
+                    {
+                        error = errorNew
+                    }
+                }
+            }
+            return .failure(error)
+        }
+    }
+}

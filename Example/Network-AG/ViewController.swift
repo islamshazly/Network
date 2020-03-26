@@ -41,6 +41,12 @@ final class ViewController: UIViewController {
         
         _ = asd.do(onNext: { (model) in
             print(model)
+            })
+        
+        _ = asd.subscribe(onNext: { (mdo) in
+            print(mdo)
+        }, onError: { (error) in
+            print(error)
         })
     }
 }
