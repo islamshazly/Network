@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+IS'
-  s.version          = '6.3.1'
+  s.version          = '7.0.0'
   s.summary          = 'Netowrk layer'
   s.homepage         = 'https://github.com/islamshazly/Network'
   s.license          = { :type => 'Islam Elshazly', :file => 'LICENSE' }
@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
   s.dependency 'XCGLogger'
   s.dependency 'ObjectMapper'
   s.dependency 'AlamofireObjectMapper'
-  s.dependency 'RxAlamofire'
-  s.dependency 'RxAlamofire+ObjectMapper'
+  s.dependency 'AlamofireNetworkActivityLogger'
+  s.dependency 'RxSwift'
 end

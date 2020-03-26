@@ -23,7 +23,7 @@ final class DooboClient: APIClient {
         return SessionManager(configuration: configuration)
     }()
     
-    var baseUrl: String = "https://staging-api-2.fanni.site/"
+    var baseUrl: String = "http://95.177.166.89/api/"
     var defaultHeaders: [String : String] = [:]
     
 }

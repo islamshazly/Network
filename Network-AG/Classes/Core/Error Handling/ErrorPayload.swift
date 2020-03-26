@@ -58,6 +58,7 @@ public class ErrorPayload: Model, Error {
     
     //
     public func mapping(map: Map) {
+        code <- map["code"]
         businessCode <- map["code"]
         status <- map["error.status"]
         message <- map["message"]

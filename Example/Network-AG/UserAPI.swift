@@ -32,7 +32,7 @@ enum UserAPI: Network_IS.Request {
     var path: String {
         switch self {
         case .login:
-            return "users/oneTimePassword"
+            return "users"
         case.logout:
             return ""
         case.signup:
@@ -43,7 +43,7 @@ enum UserAPI: Network_IS.Request {
     var method: HTTPMethod {
         switch self {
         case .login:
-            return .post
+            return .get
         case.logout:
             return .post
         case.signup:
@@ -54,7 +54,7 @@ enum UserAPI: Network_IS.Request {
     var parameterEncoding: ParameterEncoding {
         switch self {
         case .login:
-            return JSONEncoding.default
+            return URLEncoding.queryString
         case.logout:
             return URLEncoding.queryString
         case.signup:
@@ -69,7 +69,7 @@ enum UserAPI: Network_IS.Request {
     var parameters: [String : Any]? {
         switch self {
         case .login:
-            return ["username" : "966554444444"]
+            return nil
         case.logout:
             return ["type" : "sms",
                     "countryCode" : "20",
