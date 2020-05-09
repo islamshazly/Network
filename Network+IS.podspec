@@ -8,21 +8,20 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Network+IS'
-  s.version          = '7.0.0'
+  s.version          = '8.0.0'
   s.summary          = 'Netowrk layer'
   s.homepage         = 'https://github.com/islamshazly/Network'
   s.license          = { :type => 'Islam Elshazly', :file => 'LICENSE' }
-  s.author           = { 'islamshazly' => 'ishazly92.com' }
+  s.author           = { 'islamshazly' => 'islam@ishazly.com' }
   s.source           = { :git => 'https://github.com/islamshazly/Network.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/elshazly92'
-  s.ios.deployment_target = '10.0'
-  s.swift_version = '4.2'
+  s.ios.deployment_target = '13.0'
+  s.swift_version = '5.0'
   s.source_files = 'Network-AG/Classes/**/*.{swift}'
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire' 
-  s.dependency 'XCGLogger'
+  s.dependency 'Alamofire' , '~> 4.9.1'
   s.dependency 'ObjectMapper'
-  s.dependency 'AlamofireObjectMapper'
-  s.dependency 'AlamofireNetworkActivityLogger'
+  s.dependency 'AlamofireObjectMapper' , '~> 5.2.1'
   s.dependency 'RxSwift'
+  
 end

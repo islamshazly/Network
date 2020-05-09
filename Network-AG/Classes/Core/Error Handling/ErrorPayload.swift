@@ -61,7 +61,13 @@ public class ErrorPayload: Model, Error {
         code <- map["code"]
         businessCode <- map["code"]
         status <- map["error.status"]
+        message <- map["data.message"]
+        if message == "" {
+            message <- map["error.message"]
+        }
+        if message == "" {
         message <- map["message"]
+        }
     }
     
     func generateError(description: String) -> NSError {

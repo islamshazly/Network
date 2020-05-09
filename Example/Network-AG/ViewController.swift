@@ -8,7 +8,6 @@
 
 import UIKit
 import Network_IS
-import XCGLogger
 import RxSwift
 
 final class ViewController: UIViewController {

@@ -8,7 +8,6 @@
 
 import Foundation
 import Network_IS
-import XCGLogger
 import  ObjectMapper
 
 class UserDecodable: Decodable {
